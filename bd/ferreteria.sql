@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-03-2025 a las 22:43:47
+-- Tiempo de generación: 17-03-2025 a las 18:00:54
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -28,11 +28,39 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `clientes` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(100) NOT NULL,
-  `telefono` varchar(15) DEFAULT NULL,
-  `direccion` text DEFAULT NULL,
-  `correo` varchar(100) NOT NULL
+  `id_cliente` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `telefono` varchar(20) NOT NULL,
+  `direccion` text NOT NULL,
+  `correo` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_orden`
+--
+
+CREATE TABLE `detalle_orden` (
+  `id_detalle` int(11) NOT NULL,
+  `id_orden` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `precio_unitario` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_venta`
+--
+
+CREATE TABLE `detalle_venta` (
+  `id_detalle` int(11) NOT NULL,
+  `id_venta` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `precio_unitario` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -42,8 +70,8 @@ CREATE TABLE `clientes` (
 --
 
 CREATE TABLE `empleados` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(100) NOT NULL,
+  `id_empleado` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
   `cargo` varchar(50) NOT NULL,
   `salario` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -51,16 +79,31 @@ CREATE TABLE `empleados` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `inventario`
+-- Estructura de tabla para la tabla `ordenes_compra`
 --
 
-CREATE TABLE `inventario` (
-  `id` int(11) NOT NULL,
-  `nombre_producto` varchar(100) NOT NULL,
-  `categoria` varchar(100) NOT NULL,
+CREATE TABLE `ordenes_compra` (
+  `id_orden` int(11) NOT NULL,
+  `id_cliente` int(11) NOT NULL,
+  `id_empleado` int(11) NOT NULL,
+  `total` decimal(10,2) NOT NULL,
+  `estado` enum('pendiente','pagada','enviada') NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `productos`
+--
+
+CREATE TABLE `productos` (
+  `id_producto` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `categoria` varchar(50) NOT NULL,
   `precio` decimal(10,2) NOT NULL,
-  `cantidad_stock` int(11) NOT NULL,
-  `proveedor_asociado` varchar(100) NOT NULL
+  `cantidad_disponible` int(11) NOT NULL,
+  `id_proveedor` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -70,10 +113,23 @@ CREATE TABLE `inventario` (
 --
 
 CREATE TABLE `proveedores` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(100) NOT NULL,
-  `contacto` varchar(100) DEFAULT NULL,
-  `producto` varchar(100) DEFAULT NULL
+  `id_proveedor` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `contacto` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ventas`
+--
+
+CREATE TABLE `ventas` (
+  `id_venta` int(11) NOT NULL,
+  `id_cliente` int(11) NOT NULL,
+  `id_empleado` int(11) NOT NULL,
+  `total` decimal(10,2) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -84,26 +140,50 @@ CREATE TABLE `proveedores` (
 -- Indices de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`correo`);
+  ADD PRIMARY KEY (`id_cliente`),
+  ADD UNIQUE KEY `correo` (`correo`);
+
+--
+-- Indices de la tabla `detalle_orden`
+--
+ALTER TABLE `detalle_orden`
+  ADD PRIMARY KEY (`id_detalle`);
+
+--
+-- Indices de la tabla `detalle_venta`
+--
+ALTER TABLE `detalle_venta`
+  ADD PRIMARY KEY (`id_detalle`);
 
 --
 -- Indices de la tabla `empleados`
 --
 ALTER TABLE `empleados`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_empleado`);
 
 --
--- Indices de la tabla `inventario`
+-- Indices de la tabla `ordenes_compra`
 --
-ALTER TABLE `inventario`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `ordenes_compra`
+  ADD PRIMARY KEY (`id_orden`);
+
+--
+-- Indices de la tabla `productos`
+--
+ALTER TABLE `productos`
+  ADD PRIMARY KEY (`id_producto`);
 
 --
 -- Indices de la tabla `proveedores`
 --
 ALTER TABLE `proveedores`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_proveedor`);
+
+--
+-- Indices de la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  ADD PRIMARY KEY (`id_venta`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -113,25 +193,49 @@ ALTER TABLE `proveedores`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `detalle_orden`
+--
+ALTER TABLE `detalle_orden`
+  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `detalle_venta`
+--
+ALTER TABLE `detalle_venta`
+  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `empleados`
 --
 ALTER TABLE `empleados`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_empleado` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `inventario`
+-- AUTO_INCREMENT de la tabla `ordenes_compra`
 --
-ALTER TABLE `inventario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `ordenes_compra`
+  MODIFY `id_orden` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `productos`
+--
+ALTER TABLE `productos`
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedores`
 --
 ALTER TABLE `proveedores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
