@@ -18,7 +18,7 @@ public class Empleados {
      * @param id      Identificador único del empleado.
      * @param nombre  Nombre del empleado.
      * @param cargo   Cargo o posición del empleado dentro de la empresa.
-     * @param salario Salario del empleado.
+     * @param salario Salario del empleado..
      */
     public Empleados(int id, String nombre, String cargo, double salario) {
         this.ID = id;
