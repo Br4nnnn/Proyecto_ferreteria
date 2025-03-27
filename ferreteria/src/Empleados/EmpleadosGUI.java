@@ -1,3 +1,11 @@
+/**
+ * Clase EmpleadosGUI.
+ *
+ * Proporciona una interfaz gráfica para la gestión de empleados, permitiendo agregar, actualizar y eliminar registros en la base de datos.
+ *
+ * @author Alejandro Vera
+ * @version 1.0
+ */
 package Empleados;
 
 import Conexion.ConexionBD;
@@ -8,7 +16,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 
 public class EmpleadosGUI {
     private JPanel panel1;
@@ -21,10 +28,14 @@ public class EmpleadosGUI {
     private JButton actualizarButton;
     private JButton eliminarButton;
 
-
     private empleadosDAO empleadosDAO = new empleadosDAO();
     private ConexionBD conexionBD = new ConexionBD();
 
+    /**
+     * Constructor de la clase EmpleadosGUI.
+     *
+     * Inicializa la interfaz gráfica y configura los eventos de los botones.
+     */
     public EmpleadosGUI() {
         cargarEmpleados();
 
@@ -78,6 +89,9 @@ public class EmpleadosGUI {
         });
     }
 
+    /**
+     * Carga los empleados desde la base de datos y los muestra en la tabla de la interfaz gráfica.
+     */
     public void cargarEmpleados() {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID");
@@ -106,6 +120,11 @@ public class EmpleadosGUI {
         }
     }
 
+    /**
+     * Método principal que inicia la aplicación de gestión de empleados.
+     *
+     * @param args Argumentos de la línea de comandos (no utilizados).
+     */
     public static void main(String[] args) {
         JFrame frame = new JFrame("Gestión de Empleados");
         frame.setContentPane(new EmpleadosGUI().panel1);
