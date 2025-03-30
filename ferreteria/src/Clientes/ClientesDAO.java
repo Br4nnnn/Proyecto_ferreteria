@@ -33,4 +33,24 @@ public class ClientesDAO {
             e.printStackTrace();
         }
     }
+
+    public void eliminar (int id_cliente){
+        Connection con = conexionBD.getConnection();
+
+        String query = "DELETE FROM clientes WHERE id_cliente = =";
+        try{
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setInt(1,id_cliente);
+
+            int resultado = pst.executeUpdate();
+            if (resultado > 0){
+                JOptionPane.showMessageDialog(null,"El cliente ha sido eliminado con éxito.");
+            } else {
+                JOptionPane.showMessageDialog(null,"Hubo un error al eliminar al cliente.");
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 }
