@@ -1,97 +1,56 @@
-CREATE TABLE [clientes] (
-  [id_cliente] INT PRIMARY KEY,
-  [nombre] VARCHAR(100),
-  [telefono] VARCHAR(20),
-  [direccion] TEXT,
-  [correo] VARCHAR(100) UNIQUE
-)
-GO
+CREATE TABLE `clientes` (
+  `id_cliente` int PRIMARY KEY,
+  `nombre` varchar(50),
+  `telefono` varchar(50),
+  `direccion` varchar(50),
+  `correo` varchar(50)
+);
 
-CREATE TABLE [empleados] (
-  [id_empleado] INT PRIMARY KEY,
-  [nombre] VARCHAR(100),
-  [cargo] VARCHAR(50),
-  [salario] DECIMAL(10,2)
-)
-GO
+CREATE TABLE `empleados` (
+  `id_empleado` int PRIMARY KEY,
+  `nombre` varchar(50),
+  `cargo` enum(administrador,vendedor),
+  `salario` float(8,2)
+);
 
-CREATE TABLE [proveedores] (
-  [id_proveedor] INT PRIMARY KEY,
-  [nombre] VARCHAR(100),
-  [contacto] VARCHAR(100)
-)
-GO
+CREATE TABLE `proveedores` (
+  `id_proveedor` int PRIMARY KEY,
+  `nombre` varchar(50),
+  `contacto` varchar(50)
+);
 
-CREATE TABLE [productos] (
-  [id_producto] INT PRIMARY KEY,
-  [nombre] VARCHAR(100),
-  [categoria] VARCHAR(50),
-  [precio] DECIMAL(10,2),
-  [cantidad_disponible] INT,
-  [id_proveedor] INT
-)
-GO
+CREATE TABLE `inventario_productos` (
+  `id_producto` int PRIMARY KEY,
+  `categoria_producto` enum(herramienta,electricos),
+  `nombre_producto` varchar(50),
+  `precio_proveedor` float(8,2),
+  `precio_venta` float(8,2),
+  `cantidad_stock` int,
+  `id_proveedor` int
+);
 
-CREATE TABLE [ordenes_compra] (
-  [id_orden] INT PRIMARY KEY,
-  [id_cliente] INT,
-  [id_empleado] INT,
-  [total] DECIMAL(10,2),
-  [estado] ENUM(pendiente,pagada,enviada),
-  [fecha] TIMESTAMP
-)
-GO
+CREATE TABLE `ordenes_compra` (
+  `id_orden_compra` int PRIMARY KEY,
+  `id_cliente` int,
+  `id_empleado` int,
+  `id_producto` int,
+  `estado_orden` enum(pendiente,pagada,enviada),
+  `fecha_compra` timestamp
+);
 
-CREATE TABLE [detalle_orden] (
-  [id_detalle] INT PRIMARY KEY,
-  [id_orden] INT,
-  [id_producto] INT,
-  [cantidad] INT,
-  [precio_unitario] DECIMAL(10,2)
-)
-GO
+CREATE TABLE `registro_ventas` (
+  `id_venta` int PRIMARY KEY,
+  `id_orden_compra` int,
+  `total` float,
+  `fecha_registro` timestamp
+);
 
-CREATE TABLE [ventas] (
-  [id_venta] INT PRIMARY KEY,
-  [id_cliente] INT,
-  [id_empleado] INT,
-  [total] DECIMAL(10,2),
-  [fecha] TIMESTAMP
-)
-GO
+ALTER TABLE `inventario_productos` ADD FOREIGN KEY (`id_proveedor`) REFERENCES `proveedores` (`id_proveedor`);
 
-CREATE TABLE [detalle_venta] (
-  [id_detalle] INT PRIMARY KEY,
-  [id_venta] INT,
-  [id_producto] INT,
-  [cantidad] INT,
-  [precio_unitario] DECIMAL(10,2)
-)
-GO
+ALTER TABLE `ordenes_compra` ADD FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`);
 
-ALTER TABLE [productos] ADD FOREIGN KEY ([id_proveedor]) REFERENCES [proveedores] ([id_proveedor])
-GO
+ALTER TABLE `ordenes_compra` ADD FOREIGN KEY (`id_empleado`) REFERENCES `empleados` (`id_empleado`);
 
-ALTER TABLE [ordenes_compra] ADD FOREIGN KEY ([id_cliente]) REFERENCES [clientes] ([id_cliente])
-GO
+ALTER TABLE `ordenes_compra` ADD FOREIGN KEY (`id_producto`) REFERENCES `inventario_productos` (`id_producto`);
 
-ALTER TABLE [ordenes_compra] ADD FOREIGN KEY ([id_empleado]) REFERENCES [empleados] ([id_empleado])
-GO
-
-ALTER TABLE [detalle_orden] ADD FOREIGN KEY ([id_orden]) REFERENCES [ordenes_compra] ([id_orden])
-GO
-
-ALTER TABLE [detalle_orden] ADD FOREIGN KEY ([id_producto]) REFERENCES [productos] ([id_producto])
-GO
-
-ALTER TABLE [ventas] ADD FOREIGN KEY ([id_cliente]) REFERENCES [clientes] ([id_cliente])
-GO
-
-ALTER TABLE [ventas] ADD FOREIGN KEY ([id_empleado]) REFERENCES [empleados] ([id_empleado])
-GO
-
-ALTER TABLE [detalle_venta] ADD FOREIGN KEY ([id_venta]) REFERENCES [ventas] ([id_venta])
-GO
-
-ALTER TABLE [detalle_venta] ADD FOREIGN KEY ([id_producto]) REFERENCES [productos] ([id_producto])
-GO
+ALTER TABLE `registro_ventas` ADD FOREIGN KEY (`id_orden_compra`) REFERENCES `ordenes_compra` (`id_orden_compra`);
