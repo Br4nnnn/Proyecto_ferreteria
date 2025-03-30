@@ -53,4 +53,28 @@ public class ClientesDAO {
             e.printStackTrace();
         }
     }
+
+    public void actualizar (Clientes clientes){
+        Connection con = conexionBD.getConnection();
+
+        String query = "UPDATE clientes set nombre = ?, telefono = ?, direccion = ?, correo = ? WHERE id_cliente = ?";
+        try {
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, clientes.getNombre());
+            pst.setString(2, clientes.getTelefono());
+            pst.setString(3, clientes.getDireccion());
+            pst.setString(4, clientes.getCorreo());
+            pst.setInt(5, clientes.getId_cliente());
+
+            int resultado = pst.executeUpdate();
+
+            if (resultado > 0) {
+                JOptionPane.showMessageDialog(null, "Éxito al actualizar al cliente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Hubo un error al actualizar al cliente.");
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 }
