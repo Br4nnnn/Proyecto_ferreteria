@@ -26,7 +26,7 @@ public class Proveedores {
      *
      * @return ID del proveedor.
      */
-    public int getId_proveedor() {
+    public int getid_proveedor() {
         return id_proveedor;
     }
 
@@ -35,7 +35,7 @@ public class Proveedores {
      *
      * @param id_proveedor Nuevo ID del proveedor.
      */
-    public void setId_proveedor(int id_proveedor) {
+    public void setid_proveedor(int id_proveedor) {
         this.id_proveedor = id_proveedor;
     }
 
@@ -63,7 +63,7 @@ public class Proveedores {
      *
      * @return contacto del proveedor.
      */
-    public double getContacto() {
+    public double getcontacto() {
         return contacto;
     }
 
