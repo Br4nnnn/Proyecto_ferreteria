@@ -18,16 +18,16 @@ public class proveedoresDAO {
     /**
      * Agrega un nuevo empleado a la base de datos.
      *
-     * @param proveedores Objeto de la clase Empleados que contiene la información del empleado a agregar.
+     * @param proveedores Objeto de la clase proveedor que contiene la información del empleado a agregar.
      */
     public void agregar(Proveedores proveedores) {
         Connection con = ConexionBD.getConnection();
-        String query = "INSERT INTO empleados (Nombre,contacto) VALUES (?, ?)";
+        String query = "INSERT INTO proveedores (Nombre,contacto) VALUES (?, ?)";
 
         try {
             PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1, proveedores.getnombre());
-            pst.setDouble(3, proveedores.getcontacto());
+            pst.setDouble(2, proveedores.getcontacto());
 
             int resultado = pst.executeUpdate();
             if (resultado > 0) {
@@ -47,7 +47,7 @@ public class proveedoresDAO {
      */
     public void eliminar(int id_proveedor) {
         Connection con = ConexionBD.getConnection();
-        String query = "DELETE FROM proveedores WHERE id_proveedores = ?";
+        String query = "DELETE FROM proveedores WHERE id_proveedor = ?";
 
         try {
             PreparedStatement pst = con.prepareStatement(query);
@@ -65,13 +65,13 @@ public class proveedoresDAO {
     }
 
     /**
-     * Actualiza la información de un empleado en la base de datos.
+     * Actualiza la información de un proveedor en la base de datos.
      *
-     * @param proveedores Objeto de la clase Empleados con los nuevos datos del empleado.
+     * @param proveedores Objeto de la clase proveedor con los nuevos datos del proveedor.
      */
     public void actualizar(Proveedores proveedores) {
         Connection con = ConexionBD.getConnection();
-        String query = "UPDATE proveedor SET nombre = ?, contacto = ? WHERE id_proveedor = ?";
+        String query = "UPDATE proveedores SET nombre = ?, contacto = ? WHERE id_proveedor = ?";
 
         try {
             PreparedStatement pst = con.prepareStatement(query);

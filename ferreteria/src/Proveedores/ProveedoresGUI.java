@@ -35,8 +35,8 @@ public class ProveedoresGUI {
         agregarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String nombre = textField1.getText();
-                double contacto = Double.parseDouble(textField2.getText());
+                String nombre = textField2.getText();
+                double contacto = Double.parseDouble(textField3.getText());
 
                 Proveedores proveedores = new Proveedores(0, nombre, contacto);
                 proveedoresDAO.agregar(proveedores);
@@ -47,9 +47,9 @@ public class ProveedoresGUI {
         actualizarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int id_proveedor = Integer.parseInt(textField3.getText());
-                String nombre = textField1.getText();
-                double contacto = Double.parseDouble(textField2.getText());
+                int id_proveedor = Integer.parseInt(textField1.getText());
+                String nombre = textField2.getText();
+                double contacto = Double.parseDouble(textField3.getText());
 
                 Proveedores proveedores = new Proveedores(id_proveedor, nombre, contacto);
                 proveedoresDAO.actualizar(proveedores);
@@ -60,7 +60,7 @@ public class ProveedoresGUI {
         eliminarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int id_proveedor = Integer.parseInt(textField3.getText());
+                int id_proveedor = Integer.parseInt(textField1.getText());
                 proveedoresDAO.eliminar(id_proveedor);
                 cargarProveedores();
             }
@@ -71,16 +71,16 @@ public class ProveedoresGUI {
             public void mouseClicked(MouseEvent e) {
                 int filaSeleccionada = table1.getSelectedRow();
                 if (filaSeleccionada >= 0) {
-                    textField3.setText(table1.getValueAt(filaSeleccionada, 0).toString());
-                    textField1.setText(table1.getValueAt(filaSeleccionada, 1).toString());
-                    textField2.setText(table1.getValueAt(filaSeleccionada, 2).toString());
+                    textField1.setText(table1.getValueAt(filaSeleccionada, 0).toString());
+                    textField2.setText(table1.getValueAt(filaSeleccionada, 1).toString());
+                    textField3.setText(table1.getValueAt(filaSeleccionada, 2).toString());
                 }
             }
         });
     }
 
     /**
-     * Carga los empleados desde la base de datos y los muestra en la tabla de la interfaz gráfica.
+     * Carga los proveedores desde la base de datos y los muestra en la tabla de la interfaz gráfica.
      */
     public void cargarProveedores() {
         DefaultTableModel model = new DefaultTableModel();
@@ -100,7 +100,7 @@ public class ProveedoresGUI {
             while (rs.next()) {
                 datos[0] = rs.getString(1);
                 datos[1] = rs.getString(2);
-                datos[2] = rs.getString(2);
+                datos[2] = rs.getString(3);
                 model.addRow(datos);
             }
         } catch (SQLException e) {
@@ -114,7 +114,7 @@ public class ProveedoresGUI {
      * @param args Argumentos de la línea de comandos (no utilizados).
      */
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Gestión de Empleados");
+        JFrame frame = new JFrame("Gestión de Proveedores");
         frame.setContentPane(new ProveedoresGUI().panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
