@@ -8,6 +8,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Clase que representa el menú principal de la aplicación.
+ * Permite la navegación a diferentes módulos como Clientes, Empleados, Inventario de Productos y Proveedores.
+ */
 public class MenuPrincipal {
     private JPanel main;
     private JButton clientesMenu;
@@ -16,6 +20,10 @@ public class MenuPrincipal {
     private JButton ordenesCompraMenu;
     private JButton proveedoresMenu;
 
+    /**
+     * Constructor de la clase MenuPrincipal.
+     * Configura los botones para abrir las respectivas interfaces de usuario de cada módulo.
+     */
     public MenuPrincipal(){
 
         clientesMenu.addActionListener(new ActionListener() {
@@ -55,7 +63,10 @@ public class MenuPrincipal {
         });
     }
 
-
+    /**
+     * Método principal para iniciar la aplicación y mostrar el menú principal.
+     * @param args Argumentos de la línea de comandos (no se usan en este caso).
+     */
     public static void main(String[] args) {
         JFrame frame = new JFrame("Menú principal");
         frame.setContentPane(new MenuPrincipal().main);
