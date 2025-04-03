@@ -15,7 +15,6 @@ public class MenuPrincipal {
     private JButton inventarioproductoMenu;
     private JButton ordenesCompraMenu;
     private JButton proveedoresMenu;
-    private JPanel jPanelBackground;
 
     public MenuPrincipal(){
 
