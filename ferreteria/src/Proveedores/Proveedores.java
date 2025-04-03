@@ -6,7 +6,7 @@ package Proveedores;
 public class Proveedores {
     private int id_proveedor;
     private String nombre;
-    private double contacto;
+    private String contacto;
 
     /**
      * Constructor para inicializar un objeto proveedores con sus atributos.
@@ -15,7 +15,7 @@ public class Proveedores {
      * @param nombre       Nombre del proveedor.
      * @param contacto     del proveedor..
      */
-    public Proveedores(int id_proveedor, String nombre, double contacto) {
+    public Proveedores(int id_proveedor, String nombre, String contacto) {
         this.id_proveedor = id_proveedor;
         this.nombre = nombre;
         this.contacto = contacto;
@@ -63,7 +63,7 @@ public class Proveedores {
      *
      * @return contacto del proveedor.
      */
-    public double getcontacto() {
+    public String getcontacto() {
         return contacto;
     }
 
@@ -72,7 +72,7 @@ public class Proveedores {
      *
      * @param contacto del proveedor.
      */
-    public void setcontacto(double contacto) {
+    public void setcontacto(String contacto) {
         this.contacto = contacto;
     }
 }

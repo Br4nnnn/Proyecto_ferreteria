@@ -21,8 +21,10 @@ public class ProveedoresGUI {
     private JButton actualizarButton;
     private JButton eliminarButton;
 
+
     private proveedoresDAO proveedoresDAO = new proveedoresDAO();
     private ConexionBD conexionBD = new ConexionBD();
+
 
     /**
      * Constructor de la clase ProveedoresGUI.
@@ -36,7 +38,7 @@ public class ProveedoresGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String nombre = textField2.getText();
-                double contacto = Double.parseDouble(textField3.getText());
+                String contacto = textField3.getText();
 
                 Proveedores proveedores = new Proveedores(0, nombre, contacto);
                 proveedoresDAO.agregar(proveedores);
@@ -49,7 +51,7 @@ public class ProveedoresGUI {
             public void actionPerformed(ActionEvent e) {
                 int id_proveedor = Integer.parseInt(textField1.getText());
                 String nombre = textField2.getText();
-                double contacto = Double.parseDouble(textField3.getText());
+                String contacto = textField3.getText();
 
                 Proveedores proveedores = new Proveedores(id_proveedor, nombre, contacto);
                 proveedoresDAO.actualizar(proveedores);
@@ -92,6 +94,11 @@ public class ProveedoresGUI {
         String[] datos = new String[3];
         Connection con = conexionBD.getConnection();
 
+        if (con == null) {
+            System.out.println("Error: No se pudo establecer la conexión.");
+            return;
+        }
+
         try {
             Statement stat = con.createStatement();
             String query = "SELECT * FROM proveedores";
@@ -108,6 +115,7 @@ public class ProveedoresGUI {
         }
     }
 
+
     /**
      * Método principal que inicia la aplicación de gestión de empleados.
      *
@@ -123,5 +131,3 @@ public class ProveedoresGUI {
         frame.setResizable(false);
     }
 }
-
-
