@@ -26,7 +26,7 @@ public class ClientesGUI {
     private JTextField textField3;
     private JTextField textField4;
     private JTextField textField5;
-    private JButton agregarButton;
+    private JButton crearButton;
     private JButton eliminarButton;
     private JButton actualizarButton;
     private JButton volverAlMenuButton;
@@ -43,7 +43,7 @@ public class ClientesGUI {
         mostrar();
         textField1.setEnabled(false);
 
-        agregarButton.addActionListener(new ActionListener() {
+        crearButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String nombre = textField2.getText();
