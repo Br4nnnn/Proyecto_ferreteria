@@ -14,6 +14,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import MenuP.MenuPrincipal;
 
+/**
+ * Clase que representa la interfaz gráfica para la gestión de clientes.
+ * Permite agregar, eliminar, actualizar y visualizar clientes en la base de datos.
+ */
 public class ClientesGUI {
     private JPanel main;
     private JTable table1;
@@ -27,16 +31,18 @@ public class ClientesGUI {
     private JButton actualizarButton;
     private JButton volverAlMenuButton;
 
-    ClientesDAO ClientesDAO = new ClientesDAO();
+    private ClientesDAO ClientesDAO = new ClientesDAO();
+    private ConexionBD ConexionBD = new ConexionBD();
+    private int filas = 0;
 
-    ConexionBD ConexionBD = new ConexionBD();
-
-    int filas = 0 ;
-
-
+    /**
+     * Constructor de la clase ClientesGUI.
+     * Inicializa la interfaz gráfica y configura los eventos de los botones.
+     */
     public ClientesGUI() {
         mostrar();
         textField1.setEnabled(false);
+
         agregarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -47,9 +53,7 @@ public class ClientesGUI {
 
                 Clientes Clientes = new Clientes(0, nombre, telefono, direccion, correo);
                 ClientesDAO.crear(Clientes);
-
                 mostrar();
-
             }
         });
 
@@ -58,12 +62,10 @@ public class ClientesGUI {
             public void actionPerformed(ActionEvent e) {
                 int id = Integer.parseInt(textField1.getText());
                 ClientesDAO.eliminar(id);
-
                 mostrar();
-
-
             }
         });
+
         actualizarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -75,9 +77,7 @@ public class ClientesGUI {
 
                 Clientes Clientes = new Clientes(id, nombre, telefono, direccion, correo);
                 ClientesDAO.actualizar(Clientes);
-
                 mostrar();
-
             }
         });
 
@@ -99,21 +99,21 @@ public class ClientesGUI {
             }
         });
 
-
         volverAlMenuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame jFrame = (JFrame) SwingUtilities.getWindowAncestor(volverAlMenuButton);
                 jFrame.dispose();
-
                 MenuPrincipal menuPrincipal = new MenuPrincipal();
                 menuPrincipal.main(null);
             }
         });
     }
 
-    public void mostrar ()
-    {
+    /**
+     * Método que obtiene los clientes de la base de datos y los muestra en la tabla.
+     */
+    public void mostrar() {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID cliente");
         model.addColumn("Nombre");
@@ -127,11 +127,10 @@ public class ClientesGUI {
 
         try {
             Statement stat = con.createStatement();
-            String  query = "SELECT * FROM clientes";
+            String query = "SELECT * FROM clientes";
             ResultSet fb = stat.executeQuery(query);
 
-            while (fb.next())
-            {
+            while (fb.next()) {
                 dato[0] = fb.getString(1);
                 dato[1] = fb.getString(2);
                 dato[2] = fb.getString(3);
@@ -139,16 +138,15 @@ public class ClientesGUI {
                 dato[4] = fb.getString(5);
                 model.addRow(dato);
             }
-        }
-        catch (SQLException e)
-        {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-
-
-
+    /**
+     * Método principal para ejecutar la interfaz gráfica de gestión de clientes.
+     * @param args Argumentos de la línea de comandos (no se usan en este caso).
+     */
     public static void main(String[] args) {
         JFrame frame = new JFrame("Clientes");
         frame.setContentPane(new ClientesGUI().main);
