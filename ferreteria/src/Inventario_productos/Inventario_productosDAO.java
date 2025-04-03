@@ -22,16 +22,14 @@ public class Inventario_productosDAO {
      */
     public void agregar(Inventario_productos inventario_productos) {
         Connection con = ConexionBD.getConnection();
-        String query = "UPDATE inventario_productos SET categoria_producto = ?, nombre_producto = ?, precio_proveedor = ?, precio_venta= ?, cantidad_stock=? WHERE id_producto = ?";
-
+        String query = "INSERT INTO empleados (categoria_producto, nombre_producto, precio_proveedor, precio_venta, cantidad_stock) VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement pst = con.prepareStatement(query);
-            pst.setInt(1, inventario_productos.getid_producto());
-            pst.setString(2, inventario_productos.getcategoria_producto());
-            pst.setString(3, inventario_productos.getnombre_producto());
-            pst.setString(4, inventario_productos.getprecio_proveedor());
-            pst.setString(5, inventario_productos.getprecio_venta());
-            pst.setString(6, inventario_productos.getcantidad_stock());
+            pst.setString(1, inventario_productos.getcategoria_producto());
+            pst.setString(2, inventario_productos.getnombre_producto());
+            pst.setString(3, inventario_productos.getprecio_proveedor());
+            pst.setString(4, inventario_productos.getprecio_venta());
+            pst.setString(5, inventario_productos.getcantidad_stock());
 
             int resultado = pst.executeUpdate();
             if (resultado > 0) {
@@ -62,6 +60,30 @@ public class Inventario_productosDAO {
                 JOptionPane.showMessageDialog(null, "Producto eliminado exitosamente");
             } else {
                 JOptionPane.showMessageDialog(null, "Producto no eliminado");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void actualizar(Inventario_productos inventario_productos) {
+        Connection con = ConexionBD.getConnection();
+        String query = "UPDATE inventario_productos SET categoria_producto = ?, nombre_producto = ?, precio_proveedor = ?, precio_venta= ?, cantidad_stock= ? WHERE id_inventario_producto = ?";
+
+        try {
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, inventario_productos.getcategoria_producto());
+            pst.setString(2, inventario_productos.getnombre_producto());
+            pst.setString(3, inventario_productos.getprecio_proveedor());
+            pst.setString(4, inventario_productos.getprecio_venta());
+            pst.setString(5, inventario_productos.getprecio_venta());
+            pst.setInt(6, inventario_productos.getid_producto());
+
+            int resultado = pst.executeUpdate();
+            if (resultado > 0) {
+                JOptionPane.showMessageDialog(null, "Producto actualizado exitosamente");
+            } else {
+                JOptionPane.showMessageDialog(null, "Producto no actualizado");
             }
         } catch (SQLException e) {
             e.printStackTrace();
