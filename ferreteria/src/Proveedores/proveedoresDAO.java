@@ -23,14 +23,12 @@ public class proveedoresDAO {
      */
     public void agregar(Proveedores proveedores) {
         Connection con = ConexionBD.getConnection();
-        String query = "UPDATE proveedores SET nombre = ?, contacto = ? WHERE id_proveedor = ?";
-
+        String query = "INSERT INTO proveedores (nombre, contacto) VALUES (?, ?)";
 
         try {
             PreparedStatement pst = con.prepareStatement(query);
-            pst.setInt(1, proveedores.getid_proveedor());
-            pst.setString(2, proveedores.getnombre());
-            pst.setString(3, proveedores.getcontacto());
+            pst.setString(1, proveedores.getnombre());
+            pst.setString(2, proveedores.getcontacto());
 
 
             int resultado = pst.executeUpdate();
@@ -79,9 +77,9 @@ public class proveedoresDAO {
 
         try {
             PreparedStatement pst = con.prepareStatement(query);
-            pst.setInt(1, proveedores.getid_proveedor());
-            pst.setString(2, proveedores.getnombre());
-            pst.setString(3, proveedores.getcontacto());
+            pst.setString(1, proveedores.getnombre());
+            pst.setString(2, proveedores.getcontacto());
+            pst.setInt(3, proveedores.getid_proveedor());
 
             int resultado = pst.executeUpdate();
             if (resultado > 0) {
