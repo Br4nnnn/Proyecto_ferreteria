@@ -49,22 +49,22 @@ public class Inventario_productos
         this.nombre_producto = nombre_producto;
     }
 
-    public String getPrecio_proveedor()
+    public String getprecio_proveedor()
     {
         return precio_proveedor;
     }
 
-    public void setPrecio_proveedor(String precio_proveedor)
+    public void setprecio_proveedor(String precio_proveedor)
     {
         this.precio_proveedor = precio_proveedor;
     }
 
-    public String getPrecio_venta()
+    public String getprecio_venta()
     {
         return precio_venta;
     }
 
-    public void setPrecio_venta(String precio_venta) {this.precio_venta = precio_venta;}
+    public void setprecio_venta(String precio_venta) {this.precio_venta = precio_venta;}
 
     public String getcantidad_stock()
     {
@@ -72,19 +72,6 @@ public class Inventario_productos
     }
 
     public void setcantidad_stock(String cantidad_stock) {this.cantidad_stock = cantidad_stock;}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
