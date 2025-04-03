@@ -44,7 +44,7 @@ public class Inventario_productos
         return nombre_producto;
     }
 
-    public void setTelefono(String nombre_producto)
+    public void setnombre_producto(String nombre_producto)
     {
         this.nombre_producto = nombre_producto;
     }
