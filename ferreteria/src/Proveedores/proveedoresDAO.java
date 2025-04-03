@@ -1,3 +1,4 @@
+
 package Proveedores;
 
 import Conexion.ConexionBD;
@@ -22,12 +23,15 @@ public class proveedoresDAO {
      */
     public void agregar(Proveedores proveedores) {
         Connection con = ConexionBD.getConnection();
-        String query = "INSERT INTO proveedores (Nombre,contacto) VALUES (?, ?)";
+        String query = "UPDATE proveedores SET nombre = ?, contacto = ? WHERE id_proveedor = ?";
+
 
         try {
             PreparedStatement pst = con.prepareStatement(query);
-            pst.setString(1, proveedores.getnombre());
-            pst.setDouble(2, proveedores.getcontacto());
+            pst.setInt(1, proveedores.getid_proveedor());
+            pst.setString(2, proveedores.getnombre());
+            pst.setString(3, proveedores.getcontacto());
+
 
             int resultado = pst.executeUpdate();
             if (resultado > 0) {
@@ -77,7 +81,7 @@ public class proveedoresDAO {
             PreparedStatement pst = con.prepareStatement(query);
             pst.setInt(1, proveedores.getid_proveedor());
             pst.setString(2, proveedores.getnombre());
-            pst.setDouble(3, proveedores.getcontacto());
+            pst.setString(3, proveedores.getcontacto());
 
             int resultado = pst.executeUpdate();
             if (resultado > 0) {
