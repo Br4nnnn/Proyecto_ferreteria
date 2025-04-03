@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Ordenes_compraGUI {
-    private JTable table1;
     private JTextField idOrdenCompra;
     private JTextField idCliente;
     private JTextField idEmpleado;
