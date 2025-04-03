@@ -46,7 +46,7 @@ public class ClientesGUI {
                 String correo = textField5.getText();
 
                 Clientes Clientes = new Clientes(0, nombre, telefono, direccion, correo);
-                ClientesDAO.agregar(Clientes);
+                ClientesDAO.crear(Clientes);
 
                 mostrar();
 
@@ -106,7 +106,7 @@ public class ClientesGUI {
                 JFrame jFrame = (JFrame) SwingUtilities.getWindowAncestor(volverAlMenuButton);
                 jFrame.dispose();
 
-                MenuPrincipal menuPrincipal = new menuPrincipal();
+                MenuPrincipal menuPrincipal = new MenuPrincipal();
                 menuPrincipal.main(null);
             }
         });
