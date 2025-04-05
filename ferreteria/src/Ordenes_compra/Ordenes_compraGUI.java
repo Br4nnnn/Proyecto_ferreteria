@@ -1,10 +1,8 @@
 package Ordenes_compra;
 
 import MenuP.MenuPrincipal;
-import Proveedores.ProveedoresGUI;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
