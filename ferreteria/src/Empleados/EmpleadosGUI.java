@@ -9,6 +9,8 @@
 package Empleados;
 
 import Conexion.ConexionBD;
+import MenuP.MenuPrincipal;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.*;
@@ -27,6 +29,7 @@ public class EmpleadosGUI {
     private JButton agregarButton;
     private JButton actualizarButton;
     private JButton eliminarButton;
+    private JButton volverAlMenuButton;
 
     private empleadosDAO empleadosDAO = new empleadosDAO();
     private ConexionBD conexionBD = new ConexionBD();
@@ -85,6 +88,15 @@ public class EmpleadosGUI {
                     comboBox1.setSelectedItem(table1.getValueAt(filaSeleccionada, 2).toString());
                     textField2.setText(table1.getValueAt(filaSeleccionada, 3).toString());
                 }
+            }
+        });
+        volverAlMenuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame jFrame = (JFrame) SwingUtilities.getWindowAncestor(volverAlMenuButton);
+                jFrame.dispose();
+                MenuPrincipal menuPrincipal = new MenuPrincipal();
+                menuPrincipal.main(null);
             }
         });
     }

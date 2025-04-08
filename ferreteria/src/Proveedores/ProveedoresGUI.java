@@ -1,7 +1,8 @@
 package Proveedores;
 
 import Conexion.ConexionBD;
-import Proveedores.proveedoresDAO;
+import MenuP.MenuPrincipal;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.*;
@@ -9,7 +10,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 
 public class ProveedoresGUI {
     private JTable table1;
@@ -20,11 +20,10 @@ public class ProveedoresGUI {
     private JButton agregarButton;
     private JButton actualizarButton;
     private JButton eliminarButton;
-
+    private JButton volverAlMenuButton;
 
     private proveedoresDAO proveedoresDAO = new proveedoresDAO();
     private ConexionBD conexionBD = new ConexionBD();
-
 
     /**
      * Constructor de la clase ProveedoresGUI.
@@ -113,8 +112,17 @@ public class ProveedoresGUI {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
 
+        volverAlMenuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame jFrame = (JFrame) SwingUtilities.getWindowAncestor(volverAlMenuButton);
+                jFrame.dispose();
+                MenuPrincipal menuPrincipal = new MenuPrincipal();
+                menuPrincipal.main(null);
+            }
+        });
+    }
 
     /**
      * Método principal que inicia la aplicación de gestión de empleados.
@@ -127,7 +135,7 @@ public class ProveedoresGUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-        frame.setSize(880, 700);
+        frame.setSize(880, 650);
         frame.setResizable(false);
     }
 }
