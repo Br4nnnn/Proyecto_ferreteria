@@ -9,11 +9,6 @@ import Proveedores.ProveedoresGUI;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Cursor;
-
 
 public class MenuPrincipal {
     private JPanel main;
@@ -24,12 +19,6 @@ public class MenuPrincipal {
     private JButton proveedoresMenu;
 
     public MenuPrincipal(){
-        aplicarEstiloBasico(clientesMenu);
-        aplicarEstiloBasico(empleadosMenu);
-        aplicarEstiloBasico(inventariosMenu);
-        aplicarEstiloBasico(ordenesCompraMenu);
-        aplicarEstiloBasico(proveedoresMenu);
-
 
         clientesMenu.addActionListener(new ActionListener() {
             @Override
@@ -77,25 +66,10 @@ public class MenuPrincipal {
         });
     }
 
-    private void aplicarEstiloBasico(JButton boton) {
-        boton.setFocusPainted(false);
-        boton.setBackground(new Color(33, 150, 243));
-        boton.setForeground(Color.WHITE);
-        boton.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        boton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-    }
-
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Menú principal");
-        MenuPrincipal menu = new MenuPrincipal();
-        FondoPanel fondo = new FondoPanel();
-        fondo.setLayout(new BorderLayout());
-
-        menu.main.setOpaque(false);
-        fondo.add(menu.main, BorderLayout.CENTER);
-
-        frame.setContentPane(fondo);
+        frame.setContentPane(new MenuPrincipal().main);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
@@ -103,5 +77,3 @@ public class MenuPrincipal {
         frame.setResizable(false);
     }
 }
-
-
