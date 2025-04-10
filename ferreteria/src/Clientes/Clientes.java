@@ -1,34 +1,20 @@
-/**
- * Clase que representa a un cliente con atributos básicos como ID, nombre,
- * teléfono, dirección y correo electrónico.
- */
 package Clientes;
 
 /**
- * Clase Clientes que almacena la información de un cliente.
+ * Clase Clientes que representa a un cliente con sus atributos básicos.
  */
 public class Clientes {
-
-    /** Identificador único del cliente */
     private int id_cliente;
-
-    /** Nombre del cliente */
     private String nombre;
-
-    /** Teléfono del cliente */
     private String telefono;
-
-    /** Dirección del cliente */
     private String direccion;
-
-    /** Correo electrónico del cliente */
     private String correo;
 
     /**
      * Constructor de la clase Clientes.
-     * @param id_cliente Identificador del cliente.
+     * @param id_cliente Identificador único del cliente.
      * @param nombre Nombre del cliente.
-     * @param telefono Teléfono del cliente.
+     * @param telefono Número de teléfono del cliente.
      * @param direccion Dirección del cliente.
      * @param correo Correo electrónico del cliente.
      */
@@ -41,7 +27,7 @@ public class Clientes {
     }
 
     /**
-     * Obtiene el identificador del cliente.
+     * Obtiene el ID del cliente.
      * @return ID del cliente.
      */
     public int getId_cliente() {
@@ -49,7 +35,7 @@ public class Clientes {
     }
 
     /**
-     * Establece el identificador del cliente.
+     * Establece el ID del cliente.
      * @param id_cliente Nuevo ID del cliente.
      */
     public void setId_cliente(int id_cliente) {
@@ -73,16 +59,16 @@ public class Clientes {
     }
 
     /**
-     * Obtiene el teléfono del cliente.
-     * @return Teléfono del cliente.
+     * Obtiene el número de teléfono del cliente.
+     * @return Número de teléfono del cliente.
      */
     public String getTelefono() {
         return telefono;
     }
 
     /**
-     * Establece el teléfono del cliente.
-     * @param telefono Nuevo teléfono del cliente.
+     * Establece el número de teléfono del cliente.
+     * @param telefono Nuevo número de teléfono del cliente.
      */
     public void setTelefono(String telefono) {
         this.telefono = telefono;
@@ -114,7 +100,7 @@ public class Clientes {
 
     /**
      * Establece el correo electrónico del cliente.
-     * @param correo Nuevo correo del cliente.
+     * @param correo Nuevo correo electrónico del cliente.
      */
     public void setCorreo(String correo) {
         this.correo = correo;

@@ -4,6 +4,7 @@ import Conexion.ConexionBD;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -12,11 +13,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import MenuP.MenuPrincipal;
 
 /**
- * Clase que representa la interfaz gráfica para la gestión de clientes.
- * Permite agregar, eliminar, actualizar y visualizar clientes en la base de datos.
+ * @author davin
+ * Clase ClientesGUI que representa la interfaz gráfica de gestión de clientes.
+ * Permite agregar, actualizar, eliminar y visualizar clientes en una tabla.
  */
 public class ClientesGUI {
     private JPanel main;
@@ -26,24 +27,33 @@ public class ClientesGUI {
     private JTextField textField3;
     private JTextField textField4;
     private JTextField textField5;
-    private JButton crearButton;
+    private JButton agregarButton;
     private JButton eliminarButton;
     private JButton actualizarButton;
     private JButton volverAlMenuButton;
 
-    private ClientesDAO ClientesDAO = new ClientesDAO();
-    private ConexionBD ConexionBD = new ConexionBD();
-    private int filas = 0;
+    ClientesDAO ClientesDAO = new ClientesDAO();
+    ConexionBD ConexionBD = new ConexionBD();
+
+    int filas = 0;
+
+    /**
+     * Retorna el panel principal de la interfaz.
+     * @return JPanel principal de la GUI.
+     */
+    public JPanel getMainPanel() {
+        return main;
+    }
 
     /**
      * Constructor de la clase ClientesGUI.
-     * Inicializa la interfaz gráfica y configura los eventos de los botones.
+     * Inicializa la interfaz, carga los datos y configura los eventos de los botones y la tabla.
      */
     public ClientesGUI() {
         mostrar();
         textField1.setEnabled(false);
 
-        crearButton.addActionListener(new ActionListener() {
+        agregarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String nombre = textField2.getText();
@@ -52,7 +62,8 @@ public class ClientesGUI {
                 String correo = textField5.getText();
 
                 Clientes Clientes = new Clientes(0, nombre, telefono, direccion, correo);
-                ClientesDAO.crear(Clientes);
+                ClientesDAO.agregar(Clientes);
+
                 mostrar();
             }
         });
@@ -62,6 +73,7 @@ public class ClientesGUI {
             public void actionPerformed(ActionEvent e) {
                 int id = Integer.parseInt(textField1.getText());
                 ClientesDAO.eliminar(id);
+
                 mostrar();
             }
         });
@@ -77,6 +89,7 @@ public class ClientesGUI {
 
                 Clientes Clientes = new Clientes(id, nombre, telefono, direccion, correo);
                 ClientesDAO.actualizar(Clientes);
+
                 mostrar();
             }
         });
@@ -98,20 +111,10 @@ public class ClientesGUI {
                 }
             }
         });
-
-        volverAlMenuButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFrame jFrame = (JFrame) SwingUtilities.getWindowAncestor(volverAlMenuButton);
-                jFrame.dispose();
-                MenuPrincipal menuPrincipal = new MenuPrincipal();
-                menuPrincipal.main(null);
-            }
-        });
     }
 
     /**
-     * Método que obtiene los clientes de la base de datos y los muestra en la tabla.
+     * Método que carga y muestra los datos de los clientes en la tabla.
      */
     public void mostrar() {
         DefaultTableModel model = new DefaultTableModel();
@@ -144,16 +147,23 @@ public class ClientesGUI {
     }
 
     /**
-     * Método principal para ejecutar la interfaz gráfica de gestión de clientes.
-     * @param args Argumentos de la línea de comandos (no se usan en este caso).
+     * Método principal para ejecutar la aplicación.
+     * @param args Argumentos de línea de comandos.
      */
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Clientes");
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        JFrame frame = new JFrame("Clientes de Ferreteria");
         frame.setContentPane(new ClientesGUI().main);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setSize(1006, 550);
+        frame.setLocationRelativeTo(null);
         frame.setResizable(false);
     }
 }
