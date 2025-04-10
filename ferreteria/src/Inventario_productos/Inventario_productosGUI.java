@@ -1,6 +1,8 @@
 package Inventario_productos;
 
 import Conexion.ConexionBD;
+import MenuP.MenuPrincipal;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.*;
@@ -21,6 +23,7 @@ public class Inventario_productosGUI {
     private JButton actualizarButton;
     private JButton eliminarButton;
     private JComboBox comboBox1;
+    private JButton volverAlMenuButton;
 
     private Inventario_productosDAO inventario_productosDAO = new Inventario_productosDAO();
     private ConexionBD conexionBD = new ConexionBD();
@@ -131,6 +134,15 @@ public class Inventario_productosGUI {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        volverAlMenuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame jFrame = (JFrame) SwingUtilities.getWindowAncestor(volverAlMenuButton);
+                jFrame.dispose();
+                MenuPrincipal menuPrincipal = new MenuPrincipal();
+                menuPrincipal.main(null);
+            }
+        });
     }
 
     /**
@@ -144,7 +156,7 @@ public class Inventario_productosGUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-        frame.setSize(880, 700);
+        frame.setSize(880, 650);
         frame.setResizable(false);
     }
 }
