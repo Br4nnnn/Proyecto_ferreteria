@@ -151,13 +151,8 @@ public class ClientesGUI {
      * @param args Argumentos de línea de comandos.
      */
     public static void main(String[] args) {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        JFrame frame = new JFrame("Clientes de Ferreteria");
+        JFrame frame = new JFrame("Clientes");
         frame.setContentPane(new ClientesGUI().main);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();

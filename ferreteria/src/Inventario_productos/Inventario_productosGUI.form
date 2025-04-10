@@ -1,160 +1,206 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Inventario_productos.Inventario_productosGUI">
-  <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="GridLayoutManager" row-count="5" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-    <margin top="0" left="0" bottom="0" right="0"/>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Inventario.InventarioGUI">
+  <grid id="27dc6" binding="main" layout-manager="GridLayoutManager" row-count="8" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="10" left="10" bottom="10" right="10"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="544"/>
+      <xy x="20" y="20" width="726" height="400"/>
     </constraints>
-    <properties/>
+    <properties>
+      <background color="-14605013"/>
+    </properties>
     <border type="none"/>
     <children>
-      <component id="62d0d" class="javax.swing.JTable" binding="table1" default-binding="true">
+      <component id="e02b3" class="javax.swing.JLabel">
         <constraints>
-          <grid row="0" column="0" row-span="4" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="50"/>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="JetBrains Mono"/>
+          <foreground color="-1"/>
+          <text value="ID:"/>
+        </properties>
+      </component>
+      <component id="6cfec" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="JetBrains Mono"/>
+          <foreground color="-1"/>
+          <text value="Nombre:"/>
+        </properties>
+      </component>
+      <component id="91cbe" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="JetBrains Mono"/>
+          <foreground color="-1"/>
+          <text value="Categoría:"/>
+        </properties>
+      </component>
+      <component id="5e55e" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="JetBrains Mono"/>
+          <foreground color="-1"/>
+          <text value="Precio:"/>
+        </properties>
+      </component>
+      <component id="49d3" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="JetBrains Mono"/>
+          <foreground color="-1"/>
+          <text value="Stock:"/>
+        </properties>
+      </component>
+      <component id="dddef" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="JetBrains Mono"/>
+          <foreground color="-1"/>
+          <text value="Proveedor ID:"/>
+        </properties>
+      </component>
+      <component id="5ecd5" class="javax.swing.JTextField" binding="id">
+        <constraints>
+          <grid row="1" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <font name="JetBrains Mono"/>
+        </properties>
       </component>
-      <grid id="e4c49" layout-manager="GridLayoutManager" row-count="12" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-        <margin top="0" left="0" bottom="0" right="0"/>
+      <component id="2bc93" class="javax.swing.JTextField" binding="nombre">
         <constraints>
-          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="JetBrains Mono"/>
+        </properties>
+      </component>
+      <component id="f1cc5" class="javax.swing.JTextField" binding="precio">
+        <constraints>
+          <grid row="4" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="JetBrains Mono"/>
+        </properties>
+      </component>
+      <component id="ca2d" class="javax.swing.JTextField" binding="cantidad_stock">
+        <constraints>
+          <grid row="5" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="JetBrains Mono"/>
+        </properties>
+      </component>
+      <component id="99a59" class="javax.swing.JButton" binding="agregarButton">
+        <constraints>
+          <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-13276874"/>
+          <font name="JetBrains Mono"/>
+          <foreground color="-1"/>
+          <text value="Agregar"/>
+        </properties>
+      </component>
+      <component id="f4865" class="javax.swing.JButton" binding="actualizarButton">
+        <constraints>
+          <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-3772149"/>
+          <font name="JetBrains Mono"/>
+          <foreground color="-1"/>
+          <text value="Actualizar"/>
+        </properties>
+      </component>
+      <component id="fe4c2" class="javax.swing.JButton" binding="eliminarButton">
+        <constraints>
+          <grid row="7" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-7664379"/>
+          <font name="JetBrains Mono"/>
+          <foreground color="-1"/>
+          <text value="Eliminar"/>
+        </properties>
+      </component>
+      <component id="4c2b4" class="javax.swing.JComboBox" binding="comboBox1">
+        <constraints>
+          <grid row="3" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="JetBrains Mono"/>
+          <model>
+            <item value="Herramientas"/>
+            <item value="Materiales de Construcción"/>
+            <item value="Pinturas y Acabados"/>
+            <item value="Fontanería y Tuberías"/>
+            <item value="Electricidad y Cableado"/>
+            <item value="Adhesivos y Selladores"/>
+          </model>
+        </properties>
+      </component>
+      <scrollpane id="af4ff">
+        <constraints>
+          <grid row="1" column="0" row-span="6" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
         <border type="none"/>
         <children>
-          <component id="a6704" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
+          <component id="40ea" class="javax.swing.JTable" binding="table1">
+            <constraints/>
             <properties>
-              <text value="id_producto"/>
+              <font name="JetBrains Mono"/>
             </properties>
-          </component>
-          <component id="d7768" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="categoria_producto"/>
-            </properties>
-          </component>
-          <component id="75034" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="nombre_producto"/>
-            </properties>
-          </component>
-          <component id="3aece" class="javax.swing.JTextField" binding="textField3" default-binding="true">
-            <constraints>
-              <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties/>
-          </component>
-          <component id="7befe" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="precio_proveedor"/>
-            </properties>
-          </component>
-          <component id="2284d" class="javax.swing.JTextField" binding="textField4" default-binding="true">
-            <constraints>
-              <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties/>
-          </component>
-          <component id="de84e" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="precio_venta"/>
-            </properties>
-          </component>
-          <component id="2f732" class="javax.swing.JTextField" binding="textField5" default-binding="true">
-            <constraints>
-              <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties/>
-          </component>
-          <component id="8bc88" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="cantidad_stock"/>
-            </properties>
-          </component>
-          <component id="1b2e" class="javax.swing.JTextField" binding="textField6" default-binding="true">
-            <constraints>
-              <grid row="11" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties/>
-          </component>
-          <component id="a4077" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
-            <constraints>
-              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <model>
-                <item value="Herramienta"/>
-                <item value="Electricos"/>
-              </model>
-            </properties>
-          </component>
-          <component id="8f247" class="javax.swing.JTextField" binding="textField1" default-binding="true">
-            <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties/>
           </component>
         </children>
-      </grid>
-      <component id="e2e8e" class="javax.swing.JButton" binding="agregarButton" default-binding="true">
+      </scrollpane>
+      <component id="fc35" class="javax.swing.JLabel">
         <constraints>
-          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Agregar"/>
+          <font name="JetBrains Mono" size="24"/>
+          <foreground color="-1"/>
+          <text value="Inventario_productos"/>
         </properties>
       </component>
-      <component id="4f385" class="javax.swing.JButton" binding="actualizarButton" default-binding="true">
+      <component id="8bc2d" class="javax.swing.JButton" binding="volverButton">
         <constraints>
-          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Actualizar"/>
+          <background color="-12039347"/>
+          <font name="JetBrains Mono"/>
+          <foreground color="-1"/>
+          <text value="Volver al menú principal"/>
         </properties>
       </component>
-      <component id="27d87" class="javax.swing.JButton" binding="eliminarButton" default-binding="true">
+      <component id="c1dc2" class="javax.swing.JComboBox" binding="proveedorAsociadoComboBox">
         <constraints>
-          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Eliminar"/>
-        </properties>
-      </component>
-      <component id="64f8" class="javax.swing.JButton" binding="volverAlMenuButton">
-        <constraints>
-          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Volver"/>
+          <model/>
         </properties>
       </component>
     </children>

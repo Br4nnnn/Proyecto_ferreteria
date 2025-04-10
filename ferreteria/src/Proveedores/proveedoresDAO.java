@@ -1,54 +1,45 @@
-
 package Proveedores;
 
 import Conexion.ConexionBD;
+
 import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-/**
- * Clase DAO (Data Access Object) para gestionar operaciones CRUD en la tabla "Proveedores".
- * Proporciona métodos para agregar, eliminar y actualizar Proveedores en la base de datos.
- *
-
- */
-public class proveedoresDAO {
-    private ConexionBD ConexionBD = new ConexionBD();
+public class ProveedoresDAO {
+    private ConexionBD conexionBD = new ConexionBD();
 
     /**
-     * Agrega un nuevo empleado a la base de datos.
+     * Agrega un nuevo proveedor a la base de datos.
      *
-     * @param proveedores Objeto de la clase proveedor que contiene la información del empleado a agregar.
+     * @param proveedores Objeto de la clase {@link Proveedores} que contiene la información del proveedor a agregar.
      */
     public void agregar(Proveedores proveedores) {
-        Connection con = ConexionBD.getConnection();
-        String query = "INSERT INTO proveedores (nombre, contacto) VALUES (?, ?)";
+        Connection con = conexionBD.getConnection();
+        String query = "INSERT INTO proveedores (nombre, contacto, categoria_producto) VALUES (?, ?, ?)";
 
         try {
             PreparedStatement pst = con.prepareStatement(query);
-            pst.setString(1, proveedores.getnombre());
-            pst.setString(2, proveedores.getcontacto());
-
+            pst.setString(1, proveedores.getNombre());
+            pst.setString(2, proveedores.getContacto());
+            pst.setString(3, proveedores.getCategoria_producto());
 
             int resultado = pst.executeUpdate();
-            if (resultado > 0) {
-                JOptionPane.showMessageDialog(null, "Proveedores agregado exitosamente");
-            } else {
-                JOptionPane.showMessageDialog(null, "Proveedores no agregado");
-            }
+            String mensaje = resultado > 0 ? "Proveedor ingresado con éxito" : "Ups! Ocurrió un error al agregar al proveedor...";
+            JOptionPane.showMessageDialog(null, mensaje);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * Elimina un Proveedores de la base de datos según su id_proveedor.
+     * Elimina un proveedor de la base de datos basado en su ID.
      *
-     * @param id_proveedor Identificador único del Proveedores a eliminar.
+     * @param id_proveedor Identificador único del proveedor a eliminar.
      */
     public void eliminar(int id_proveedor) {
-        Connection con = ConexionBD.getConnection();
+        Connection con = conexionBD.getConnection();
         String query = "DELETE FROM proveedores WHERE id_proveedor = ?";
 
         try {
@@ -56,37 +47,32 @@ public class proveedoresDAO {
             pst.setInt(1, id_proveedor);
 
             int resultado = pst.executeUpdate();
-            if (resultado > 0) {
-                JOptionPane.showMessageDialog(null, "Proveedores eliminado exitosamente");
-            } else {
-                JOptionPane.showMessageDialog(null, "Proveedores no eliminado");
-            }
+            String mensaje = resultado > 0 ? "Proveedor eliminado con éxito!" : "Ups! Ocurrió un problema al eliminar el proveedor...";
+            JOptionPane.showMessageDialog(null, mensaje);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * Actualiza la información de un proveedor en la base de datos.
+     * Actualiza los datos de un proveedor en la base de datos.
      *
-     * @param proveedores Objeto de la clase proveedor con los nuevos datos del proveedor.
+     * @param proveedores Objeto de la clase {@link Proveedores} con los datos actualizados del proveedor.
      */
     public void actualizar(Proveedores proveedores) {
-        Connection con = ConexionBD.getConnection();
-        String query = "UPDATE proveedores SET nombre = ?, contacto = ? WHERE id_proveedor = ?";
+        Connection con = conexionBD.getConnection();
+        String query = "UPDATE proveedores SET nombre = ?, contacto = ?, categoria_producto = ? WHERE id_proveedor = ?";
 
         try {
             PreparedStatement pst = con.prepareStatement(query);
-            pst.setString(1, proveedores.getnombre());
-            pst.setString(2, proveedores.getcontacto());
-            pst.setInt(3, proveedores.getid_proveedor());
+            pst.setString(1, proveedores.getNombre());
+            pst.setString(2, proveedores.getContacto());
+            pst.setString(3, proveedores.getCategoria_producto());
+            pst.setInt(4, proveedores.getId_proveedor());
 
             int resultado = pst.executeUpdate();
-            if (resultado > 0) {
-                JOptionPane.showMessageDialog(null, "Proveedor actualizado exitosamente");
-            } else {
-                JOptionPane.showMessageDialog(null, "Proveedor no actualizado");
-            }
+            String mensaje = resultado > 0 ? "Proveedor actualizado con éxito!" : "Ups! Ocurrió un error al actualizar al proveedor";
+            JOptionPane.showMessageDialog(null, mensaje);
         } catch (SQLException e) {
             e.printStackTrace();
         }

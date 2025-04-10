@@ -1,162 +1,259 @@
 package Inventario_productos;
 
 import Conexion.ConexionBD;
-import MenuP.MenuPrincipal;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Interfaz gráfica de usuario para la gestión de inventario.
+ * Permite agregar, actualizar y eliminar productos.
+ *
+ * @author Cristian Restrepo
+ * @version 1.0
+ */
 public class Inventario_productosGUI {
-    private JTable table1;
-    private JPanel panel1;
-    private JTextField textField1;
-    private JTextField textField3;
-    private JTextField textField4;
-    private JTextField textField5;
-    private JTextField textField6;
-    private JButton agregarButton;
-    private JButton actualizarButton;
-    private JButton eliminarButton;
-    private JComboBox comboBox1;
-    private JButton volverAlMenuButton;
+    /** Panel principal de la interfaz */
+    public JPanel main; // Make this public for direct access
 
-    private Inventario_productosDAO inventario_productosDAO = new Inventario_productosDAO();
-    private ConexionBD conexionBD = new ConexionBD();
+    /** Tabla para mostrar los productos */
+    private JTable table1;
+
+    /** Campo de texto para el ID del producto */
+    private JTextField id;
+
+    /** Campo de texto para el nombre del producto */
+    private JTextField nombre;
+
+    /** Campo de texto para la categoría del producto */
+    private JTextField categoria;
+
+    /** Campo de texto para el precio del producto */
+    private JTextField precio;
+
+    /** Campo de texto para la cantidad en stock */
+    private JTextField cantidad_stock;
+
+    /** Campo de texto para el ID del proveedor */
+    private JTextField id_proveedor;
+
+    /** Botón para agregar un nuevo producto */
+    private JButton agregarButton;
+
+    /** Botón para actualizar un producto existente */
+    private JButton actualizarButton;
+
+    /** Botón para eliminar un producto */
+    private JButton eliminarButton;
+    private JButton volverButton;
+    private JComboBox comboBox1;
+    private JComboBox proveedorAsociadoComboBox;
+
+    /** Objeto para realizar operaciones de acceso a datos */
+    Inventario_productosDAO inventarioProductosDAO = new Inventario_productosDAO();
 
     /**
-     * Constructor de la clase Inventario_productosGUI.
-     *
-     * Inicializa la interfaz gráfica y configura los eventos de los botones.
+     * Constructor de la interfaz gráfica de inventario.
+     * Inicializa los componentes y configura los listeners.
      */
     public Inventario_productosGUI() {
-        cargarInventario_productos(); // Asegúrate de que este método esté definido correctamente fuera de cualquier acción.
+        obtener_datos();
+        id.setEnabled(false);
 
         agregarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String categoria_producto = (String) comboBox1.getSelectedItem();
-                String nombre_producto = textField3.getText();
-                String precio_proveedor = textField4.getText();
-                String precio_venta = textField5.getText();
-                String cantidad_stock = textField6.getText();
-
-
-                Inventario_productos inventario_producto = new Inventario_productos(0, categoria_producto, nombre_producto, precio_proveedor, precio_venta, cantidad_stock);
-                inventario_productosDAO.agregar(inventario_producto);
-                cargarInventario_productos();
+                String nombreProducto = nombre.getText();
+                String categoriaProducto = comboBox1.getSelectedItem().toString();
+                int precioProducto = Integer.parseInt(precio.getText());
+                int cantidadStock = Integer.parseInt(cantidad_stock.getText());
+                String seleccionado = proveedorAsociadoComboBox.getSelectedItem().toString();
+                Integer idProveedor = null;
+                if (!seleccionado.isEmpty() && seleccionado.contains(" - ")) {
+                    // Se asume que el formato es "id - nombre"
+                    String[] partes = seleccionado.split(" - ");
+                    idProveedor = Integer.parseInt(partes[0]);
+                }
+                Inventario_productos inventarioProductos = new Inventario_productos(0, nombreProducto, categoriaProducto, cantidadStock, precioProducto, idProveedor);
+                inventarioProductosDAO.agregar(inventarioProductos);
+                obtener_datos();
+                clear();
             }
         });
 
         actualizarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    int id_producto = Integer.parseInt(textField1.getText());
-                    String nombre_producto = textField3.getText();
-                    String precio_proveedor = textField4.getText();
-                    String precio_venta = textField5.getText();
-                    String cantidad_stock = textField6.getText();
-                    String categoria_producto = (String) comboBox1.getSelectedItem();
-
-                    Inventario_productos inventario_producto = new Inventario_productos(id_producto, categoria_producto, nombre_producto, precio_proveedor, precio_venta, cantidad_stock);
-                    inventario_productosDAO.actualizar(inventario_producto);
-                    cargarInventario_productos();
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "ID de producto no válido.");
+                String nombreProducto = nombre.getText();
+                String categoriaProducto = comboBox1.getSelectedItem().toString();
+                int precioProducto = Integer.parseInt(precio.getText());
+                int cantidadStock = Integer.parseInt(cantidad_stock.getText());
+                int idProducto = Integer.parseInt(id.getText());
+                String seleccionado = proveedorAsociadoComboBox.getSelectedItem().toString();
+                Integer idProveedor = null;
+                if (!seleccionado.isEmpty() && seleccionado.contains(" - ")) {
+                    // Se asume que el formato es "id - nombre"
+                    String[] partes = seleccionado.split(" - ");
+                    idProveedor = Integer.parseInt(partes[0]);
                 }
+
+                Inventario_productos inventarioProductos = new Inventario_productos(idProducto, nombreProducto, categoriaProducto, cantidadStock, precioProducto, idProveedor);
+                inventarioProductosDAO.actualizar(inventarioProductos);
+                obtener_datos();
+                clear();
             }
+        });
+
+        // Llamamos al método para cargar proveedores y asignamos el modelo al combobox
+        DefaultComboBoxModel<String> proveedorModel = inventarioProductosDAO.cargarProveedores();
+        proveedorAsociadoComboBox.setModel(proveedorModel);
+
+        // Si necesitás detectar cambios en el combobox para extraer el id,
+        // podés agregar un ActionListener:
+        proveedorAsociadoComboBox.addActionListener(e -> {
+            String seleccionado = (String) proveedorAsociadoComboBox.getSelectedItem();
+
+            // Por ejemplo, si el formato es "id - nombre", podés extraer el id así:
+            if(seleccionado != null && seleccionado.contains(" - ")) {
+                String[] parts = seleccionado.split(" - ");
+                int idProveedor = Integer.parseInt(parts[0]);
+                System.out.println("Proveedor seleccionado: " + idProveedor);
+                // Guardá o procesá el idProveedor según necesites
+            }
+
+
         });
 
         eliminarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    int id_producto = Integer.parseInt(textField1.getText()); // Usando textField1 para el ID
-                    inventario_productosDAO.eliminar(id_producto);
-                    cargarInventario_productos();
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "ID de producto no válido.");
-                }
+                int idProducto = Integer.parseInt(id.getText());
+                inventarioProductosDAO.eliminar(idProducto);
+                obtener_datos();
+                clear();
             }
         });
 
         table1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int filaSeleccionada = table1.getSelectedRow();
-                if (filaSeleccionada >= 0) {
-                    textField1.setText(table1.getValueAt(filaSeleccionada, 0).toString());
-                    comboBox1.setSelectedItem(table1.getValueAt(filaSeleccionada, 1).toString());
-                    textField3.setText(table1.getValueAt(filaSeleccionada, 2).toString());
-                    textField4.setText(table1.getValueAt(filaSeleccionada, 3).toString());
-                    textField5.setText(table1.getValueAt(filaSeleccionada, 4).toString());
-                    textField6.setText(table1.getValueAt(filaSeleccionada, 5).toString());
+                super.mouseClicked(e);
+                int selectFila = table1.getSelectedRow();
+
+                if (selectFila >= 0) {
+                    id.setText(table1.getValueAt(selectFila, 0).toString());
+                    nombre.setText(table1.getValueAt(selectFila, 1).toString());
+                    comboBox1.setSelectedItem(table1.getValueAt(selectFila, 2).toString());
+                    cantidad_stock.setText(table1.getValueAt(selectFila, 3).toString());
+                    precio.setText(table1.getValueAt(selectFila, 4).toString());
+
+                    // Handle potential null value for provider ID
+                    Object proveedorValue = table1.getValueAt(selectFila, 5);
+                    id_proveedor.setText(proveedorValue == null ? "" : proveedorValue.toString());
                 }
             }
         });
+
+        // Add functionality to volverButton (if needed) to return to main menu
+        if (volverButton != null) {
+            volverButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // This will be handled by MenuPrueba
+                    Container parent = main.getParent();
+                    if (parent != null && parent.getLayout() instanceof CardLayout) {
+                        CardLayout cl = (CardLayout) parent.getLayout();
+                        cl.show(parent, "welcome");
+                    }
+                }
+            });
+        }
     }
 
     /**
-     * Carga los productos desde la base de datos y los muestra en la tabla de la interfaz gráfica.
+     * Limpia todos los campos de entrada de la interfaz.
      */
-    public void cargarInventario_productos() {
+    public void clear() {
+        id.setText("");
+        nombre.setText("");
+        comboBox1.setSelectedIndex(0);
+        precio.setText("");
+        cantidad_stock.setText("");
+        id_proveedor.setText("");
+    }
+
+    /** Conexión a la base de datos */
+    ConexionBD conexionBD = new ConexionBD();
+
+    /**
+     * Obtiene y muestra los datos de productos en la tabla.
+     */
+    public void obtener_datos() {
         DefaultTableModel model = new DefaultTableModel();
+
         model.addColumn("id_producto");
-        model.addColumn("categoria_Producto");
         model.addColumn("nombre_producto");
-        model.addColumn("precio_proveedor");
-        model.addColumn("precio_venta");
+        model.addColumn("categoria");
         model.addColumn("cantidad_stock");
+        model.addColumn("precio_producto");
+        model.addColumn("id_proveedor_asociado");
 
         table1.setModel(model);
-        String[] datos = new String[6];
+        Object[] dato = new Object[6];
         Connection con = conexionBD.getConnection();
 
         try {
-            Statement stat = con.createStatement();
+            Statement stmt = con.createStatement();
             String query = "SELECT * FROM inventario_productos";
-            ResultSet rs = stat.executeQuery(query);
+            ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
-                datos[0] = rs.getString(1);
-                datos[1] = rs.getString(2);
-                datos[2] = rs.getString(3);
-                datos[3] = rs.getString(4);
-                datos[4] = rs.getString(5);
-                datos[5] = rs.getString(6);
-                model.addRow(datos);
+                dato[0] = rs.getInt("id_producto");
+                dato[1] = rs.getString("nombre_producto");
+                dato[2] = rs.getString("categoria");
+                dato[3] = rs.getInt("cantidad_stock");
+                dato[4] = rs.getInt("precio_producto");
+                dato[5] = rs.getObject("id_proveedor_asociado");
+                model.addRow(dato);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        volverAlMenuButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFrame jFrame = (JFrame) SwingUtilities.getWindowAncestor(volverAlMenuButton);
-                jFrame.dispose();
-                MenuPrincipal menuPrincipal = new MenuPrincipal();
-                menuPrincipal.main(null);
-            }
-        });
     }
 
     /**
-     * Método principal que inicia la aplicación de gestión de inventario de productos.
+     * Returns the main panel of this GUI.
+     * This method is used by MenuPrueba to get the panel to display.
      *
-     * @param args Argumentos de la línea de comandos (no utilizados).
+     * @return The main panel of this GUI
+     */
+    public JPanel getMainPanel() {
+        return main; // Return the actual main panel instead of null
+    }
+
+    /**
+     * Método principal para iniciar la aplicación de gestión de inventario.
+     *
+     * @param args Argumentos de línea de comandos
      */
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Gestión de Inventario de Productos");
-        frame.setContentPane(new Inventario_productosGUI().panel1);
+
+        JFrame frame = new JFrame("Gestión de Inventario");
+        frame.setContentPane(new Inventario_productosGUI().main);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-        frame.setSize(880, 650);
+        frame.setSize(1006,550);
+        frame.setLocationRelativeTo(null);
         frame.setResizable(false);
     }
 }

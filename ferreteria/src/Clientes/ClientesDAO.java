@@ -31,9 +31,9 @@ public class ClientesDAO {
 
             int resultado = pst.executeUpdate();
             if (resultado > 0) {
-                JOptionPane.showMessageDialog(null, "Cliente agregado exitosamente");
+                JOptionPane.showMessageDialog(null, "El cliente ha sido agregado exitosamente.");
             } else {
-                JOptionPane.showMessageDialog(null, "Cliente no agregado");
+                JOptionPane.showMessageDialog(null, "Error al añadir al cliente.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -54,9 +54,9 @@ public class ClientesDAO {
 
             int resultado = pst.executeUpdate();
             if (resultado > 0) {
-                JOptionPane.showMessageDialog(null, "Cliente eliminado exitosamente");
+                JOptionPane.showMessageDialog(null, "Cliente eliminado con éxito.");
             } else {
-                JOptionPane.showMessageDialog(null, "Cliente no eliminado");
+                JOptionPane.showMessageDialog(null, "Error al eliminar al cliente.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -81,9 +81,9 @@ public class ClientesDAO {
 
             int resultado = pst.executeUpdate();
             if (resultado > 0) {
-                JOptionPane.showMessageDialog(null, "Cliente actualizado exitosamente");
+                JOptionPane.showMessageDialog(null, "Cliente actualizado con éxito");
             } else {
-                JOptionPane.showMessageDialog(null, "Cliente no actualizado");
+                JOptionPane.showMessageDialog(null, "Error al actualizar al cliente.");
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -1,131 +1,168 @@
-/**
- * Clase EmpleadosGUI.
- *
- * Proporciona una interfaz gráfica para la gestión de empleados, permitiendo agregar, actualizar y eliminar registros en la base de datos.
- *
- * @author Alejandro Vera
- * @version 1.0
- */
 package Empleados;
 
 import Conexion.ConexionBD;
-import MenuP.MenuPrincipal;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Interfaz gráfica de usuario para la gestión de empleados.
+ *
+ * @author Cristian Restrepo
+ * @version 1.0
+ */
 public class EmpleadosGUI {
-    private JPanel panel1;
-    private JTextField textField3;
-    private JTextField textField1;
-    private JComboBox comboBox1;
-    private JTextField textField2;
-    private JTable table1;
-    private JButton agregarButton;
-    private JButton actualizarButton;
-    private JButton eliminarButton;
-    private JButton volverAlMenuButton;
+    /** Panel principal de la interfaz */
+    private JPanel main;
 
-    private empleadosDAO empleadosDAO = new empleadosDAO();
-    private ConexionBD conexionBD = new ConexionBD();
+    /** Tabla para mostrar los empleados */
+    private JTable table1;
+
+    /** Campo de texto para el ID del empleado */
+    private JTextField ID;
+
+    /** Campo de texto para el nombre del empleado */
+    private JTextField Nombre;
+
+    /** Campo de texto para el salario del empleado */
+    private JTextField Salario;
+
+    /** Botón para agregar un nuevo empleado */
+    private JButton agregarButton;
+
+    /** Botón para actualizar la información de un empleado */
+    private JButton actualizarButton;
+
+    /** Botón para eliminar un empleado */
+    private JButton eliminarButton;
+
+    /** Combo box para seleccionar el cargo del empleado */
+    private JComboBox comboBox1;
+    private JButton volverButton;
+
+    /** Variable para rastrear la fila seleccionada */
+    int filas = 0;
+
+    /** Objeto para realizar operaciones de acceso a datos */
+    EmpleadosDAO empleadosDAO = new EmpleadosDAO();
 
     /**
-     * Constructor de la clase EmpleadosGUI.
-     *
-     * Inicializa la interfaz gráfica y configura los eventos de los botones.
+     * Constructor de la interfaz gráfica de empleados.
+     * Inicializa los componentes y configura los listeners.
      */
+    public JPanel getMainPanel() {
+        return main; // Return the actual main panel instead of null
+    }
+
     public EmpleadosGUI() {
-        cargarEmpleados();
+        obtener_datos();
+        ID.setEnabled(false);
 
         agregarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String nombre = textField1.getText();
+                String nombre = Nombre.getText();
                 String cargo = (String) comboBox1.getSelectedItem();
-                double salario = Double.parseDouble(textField2.getText());
+                double salario = Double.parseDouble(Salario.getText());
 
-                Empleados empleado = new Empleados(0, nombre, cargo, salario);
-                empleadosDAO.agregar(empleado);
-                cargarEmpleados();
+                Empleados empleados = new Empleados(0, nombre, cargo, salario);
+                empleadosDAO.agregar(empleados);
+                obtener_datos();
+                clear();
             }
         });
 
         actualizarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int id = Integer.parseInt(textField3.getText());
-                String nombre = textField1.getText();
+                String nombre = Nombre.getText();
                 String cargo = (String) comboBox1.getSelectedItem();
-                double salario = Double.parseDouble(textField2.getText());
+                double salario = Double.parseDouble(Salario.getText());
+                int id = Integer.parseInt(ID.getText());
 
-                Empleados empleado = new Empleados(id, nombre, cargo, salario);
-                empleadosDAO.actualizar(empleado);
-                cargarEmpleados();
+                Empleados empleados = new Empleados(id, nombre, cargo, salario);
+                empleadosDAO.actualizar(empleados);
+                obtener_datos();
+                clear();
             }
         });
 
         eliminarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int id = Integer.parseInt(textField3.getText());
+                int id = Integer.parseInt(ID.getText());
                 empleadosDAO.eliminar(id);
-                cargarEmpleados();
+                obtener_datos();
+                clear();
             }
         });
 
         table1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int filaSeleccionada = table1.getSelectedRow();
-                if (filaSeleccionada >= 0) {
-                    textField3.setText(table1.getValueAt(filaSeleccionada, 0).toString());
-                    textField1.setText(table1.getValueAt(filaSeleccionada, 1).toString());
-                    comboBox1.setSelectedItem(table1.getValueAt(filaSeleccionada, 2).toString());
-                    textField2.setText(table1.getValueAt(filaSeleccionada, 3).toString());
+                super.mouseClicked(e);
+                int selectFila = table1.getSelectedRow();
+
+                if (selectFila >= 0) {
+                    ID.setText(table1.getValueAt(selectFila, 0).toString());
+                    Nombre.setText(table1.getValueAt(selectFila, 1).toString());
+                    comboBox1.setSelectedItem(table1.getValueAt(selectFila, 2));
+                    Salario.setText(table1.getValueAt(selectFila, 3).toString());
+
+                    filas = selectFila;
                 }
-            }
-        });
-        volverAlMenuButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFrame jFrame = (JFrame) SwingUtilities.getWindowAncestor(volverAlMenuButton);
-                jFrame.dispose();
-                MenuPrincipal menuPrincipal = new MenuPrincipal();
-                menuPrincipal.main(null);
             }
         });
     }
 
     /**
-     * Carga los empleados desde la base de datos y los muestra en la tabla de la interfaz gráfica.
+     * Limpia los campos de entrada de la interfaz.
      */
-    public void cargarEmpleados() {
+    public void clear() {
+        ID.setText("");
+        Nombre.setText("");
+        comboBox1.setSelectedItem("");
+        Salario.setText("");
+    }
+
+    /** Conexión a la base de datos */
+    ConexionBD conexionDB = new ConexionBD();
+
+    /**
+     * Obtiene y muestra los datos de empleados en la tabla.
+     */
+    public void obtener_datos() {
         DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("ID");
-        model.addColumn("Nombre");
-        model.addColumn("Cargo");
-        model.addColumn("Salario");
+
+        model.addColumn("id");
+        model.addColumn("nombre");
+        model.addColumn("cargo");
+        model.addColumn("salario");
 
         table1.setModel(model);
-        String[] datos = new String[4];
-        Connection con = conexionBD.getConnection();
+        Object[] dato = new Object[4];
+        Connection con = ConexionBD.getConnection();
 
         try {
-            Statement stat = con.createStatement();
+            Statement stmt = con.createStatement();
             String query = "SELECT * FROM empleados";
-            ResultSet rs = stat.executeQuery(query);
+            ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
-                datos[0] = rs.getString(1);
-                datos[1] = rs.getString(2);
-                datos[2] = rs.getString(3);
-                datos[3] = rs.getString(4);
-                model.addRow(datos);
+                dato[0] = rs.getInt(1);
+                dato[1] = rs.getString(2);
+                dato[2] = rs.getString(3);
+                dato[3] = rs.getDouble(4);
+                model.addRow(dato);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -133,17 +170,19 @@ public class EmpleadosGUI {
     }
 
     /**
-     * Método principal que inicia la aplicación de gestión de empleados.
+     * Método principal para iniciar la aplicación de gestión de empleados.
      *
-     * @param args Argumentos de la línea de comandos (no utilizados).
+     * @param args Argumentos de línea de comandos
      */
     public static void main(String[] args) {
+
         JFrame frame = new JFrame("Gestión de Empleados");
-        frame.setContentPane(new EmpleadosGUI().panel1);
+        frame.setContentPane(new EmpleadosGUI().main);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-        frame.setSize(880, 700);
+        frame.setSize(1006,550);
+        frame.setLocationRelativeTo(null);
         frame.setResizable(false);
     }
 }

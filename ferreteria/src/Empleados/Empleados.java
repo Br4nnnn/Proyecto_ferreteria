@@ -1,85 +1,110 @@
-/**
- * Clase que representa un empleado en el sistema de gestión de empleados.
- * Contiene información básica como ID, nombre, cargo y salario.
- *
- * @author Alejandro Vera
- */
 package Empleados;
 
-public class Empleados {
-    private int ID;
-    private String Nombre;
-    private String Cargo;
-    private double Salario;
+/**
+ * Representa un empleado con sus atributos básicos.
+ *
+ * @author Cristian Restrepo Muriel
+ * @version 1.0
+ */
+public class Empleados
+{
+    /** Identificador único del empleado */
+    int id_empleado;
+
+    /** Nombre del empleado */
+    String nombre;
+
+    /** Cargo del empleado */
+    String cargo;
+
+    /** Salario del empleado */
+    double salario;
 
     /**
-     * Constructor para inicializar un objeto Empleados con sus atributos.
+     * Constructor para crear un nuevo empleado.
      *
-     * @param id      Identificador único del empleado.
-     * @param nombre  Nombre del empleado.
-     * @param cargo   Cargo o posición del empleado dentro de la empresa.
-     * @param salario Salario del empleado..
+     * @param id_empleado Identificador único del empleado
+     * @param nombre Nombre del empleado
+     * @param cargo Cargo del empleado
+     * @param salario Salario del empleado
      */
-    public Empleados(int id, String nombre, String cargo, double salario) {
-        this.ID = id;
-        this.Nombre = nombre;
-        this.Cargo = cargo;
-        this.Salario = salario;
+    public Empleados(int id_empleado, String nombre, String cargo, double salario)
+    {
+        this.id_empleado = id_empleado;
+        this.nombre = nombre;
+        this.cargo = cargo;
+        this.salario = salario;
     }
 
     /**
      * Obtiene el ID del empleado.
      *
-     * @return ID del empleado.
+     * @return Identificador del empleado
      */
-    public int getID() { return ID; }
+    public int getId_empleado() {
+        return id_empleado;
+    }
 
     /**
      * Establece el ID del empleado.
      *
-     * @param ID Nuevo ID del empleado.
+     * @param id_empleado Nuevo identificador del empleado
      */
-    public void setID(int ID) { this.ID = ID; }
+    public void setId_empleado(int id_empleado) {
+        this.id_empleado = id_empleado;
+    }
 
     /**
      * Obtiene el nombre del empleado.
      *
-     * @return Nombre del empleado.
+     * @return Nombre del empleado
      */
-    public String getNombre() { return Nombre; }
+    public String getNombre() {
+        return nombre;
+    }
 
     /**
      * Establece el nombre del empleado.
      *
-     * @param nombre Nuevo nombre del empleado.
+     * @param nombre Nuevo nombre del empleado
      */
-    public void setNombre(String nombre) { this.Nombre = nombre; }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
     /**
      * Obtiene el cargo del empleado.
      *
-     * @return Cargo del empleado.
+     * @return Cargo del empleado
      */
-    public String getCargo() { return Cargo; }
+    public String getCargo() {
+        return cargo;
+    }
 
     /**
      * Establece el cargo del empleado.
      *
-     * @param cargo Nuevo cargo del empleado.
+     * @param cargo Nuevo cargo del empleado
      */
-    public void setCargo(String cargo) { this.Cargo = cargo; }
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
 
     /**
      * Obtiene el salario del empleado.
      *
-     * @return Salario del empleado.
+     * @return Salario del empleado
      */
-    public double getSalario() { return Salario; }
+    public double getSalario() {
+        return salario;
+    }
 
     /**
      * Establece el salario del empleado.
      *
-     * @param salario Nuevo salario del empleado.
+     * @param salario Nuevo salario del empleado
      */
-    public void setSalario(double salario) { this.Salario = salario; }
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
 }
