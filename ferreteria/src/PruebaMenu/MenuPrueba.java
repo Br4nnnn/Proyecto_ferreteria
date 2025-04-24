@@ -9,7 +9,6 @@ import Proveedores.ProveedoresGUI;
 import Reportes.ReportesGUI;
 import Sockets.ServidorGUI;
 import VentasGUI.VentasGUI;
-import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,6 +19,8 @@ import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
+import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
+
 
 public class MenuPrueba {
     // Componentes principales de la interfaz gráfica
@@ -35,7 +36,6 @@ public class MenuPrueba {
     public JButton btnOrdenesCompra; // Botón para acceder al módulo de órdenes de compra
     public JButton btnVender; // Botón para acceder al módulo de ventas
     public JButton btnReportes; // Botón para acceder al módulo de reportes
-    public JButton btnToggleMenu; // Botón para mostrar/ocultar el menú lateral
     public JLabel lblWelcomeImage; // Etiqueta para mostrar una imagen de bienvenida
     private JButton chatButton; // Botón para acceder al módulo de chat
     private JButton salirButton;
@@ -49,22 +49,12 @@ public class MenuPrueba {
         contentPanel.setLayout(new CardLayout());
         contentPanel.add(welcomePanel, "welcome");
 
-        // Mostrar/Ocultar menú lateral
-        btnToggleMenu.addActionListener(e -> {
-            menuVisible = !menuVisible;
-            menuPanel.setVisible(menuVisible);
-            btnToggleMenu.setText(menuVisible ? "☰ Ocultar Menú" : "☰ Mostrar Menú");
-            mainPanel.revalidate();
-            mainPanel.repaint();
-        });
-
-        // Cargar imagen en lblWelcomeImage
         try {
             // Obtener el tamaño del JLabel
             int lblWidth = lblWelcomeImage.getWidth();
             int lblHeight = lblWelcomeImage.getHeight();
             // Cargar la imagen desde el archivo
-            ImageIcon imagenFondo = new ImageIcon("Resources/Img/fondo_ferreteria.jpg");
+            ImageIcon imagenFondo = new ImageIcon("Resources/Img/fondo_ferreteria.png");
             // Redimensionar la imagen si es necesario
             Image img = imagenFondo.getImage();
             // Ajustar al tamaño que necesites (puedes ajustar estos valores)

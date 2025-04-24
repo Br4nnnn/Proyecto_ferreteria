@@ -16,6 +16,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class InventarioGUI {
+    private Connection con;
+
+    public InventarioGUI(Connection connection){
+        this.con = connection;
+    }
     public JPanel main; // Make this public for direct access
 
     private JTable table1;
@@ -166,7 +171,7 @@ public class InventarioGUI {
         id_proveedor.setText("");
     }
 
-    ConexionDB conexionDB = new ConexionDB();
+    ConexionDB ConexionDB = new ConexionDB();
 
     public void obtener_datos() {
         DefaultTableModel model = new DefaultTableModel();
@@ -180,7 +185,7 @@ public class InventarioGUI {
 
         table1.setModel(model);
         Object[] dato = new Object[6];
-        Connection con = conexionDB.getConnection();
+        Connection con = ConexionDB.getConnection();
 
         try {
             Statement stmt = con.createStatement();

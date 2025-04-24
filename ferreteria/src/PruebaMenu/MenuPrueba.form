@@ -211,7 +211,7 @@
                 </constraints>
                 <properties>
                   <font name="JetBrains Mono" size="28" style="1"/>
-                  <foreground color="-458761"/>
+                  <foreground color="-16777216"/>
                   <horizontalAlignment value="0"/>
                   <text value="Sistema de Gestión de Ferretería"/>
                 </properties>
