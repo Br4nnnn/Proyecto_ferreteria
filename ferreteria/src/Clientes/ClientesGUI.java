@@ -1,6 +1,7 @@
 package Clientes;
 
-import Conexion.ConexionBD;
+import Conexion.ConexionDB;
+import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -14,11 +15,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- * @author davin
- * Clase ClientesGUI que representa la interfaz gráfica de gestión de clientes.
- * Permite agregar, actualizar, eliminar y visualizar clientes en una tabla.
- */
 public class ClientesGUI {
     private JPanel main;
     private JTable table1;
@@ -33,22 +29,14 @@ public class ClientesGUI {
     private JButton volverAlMenuButton;
 
     ClientesDAO ClientesDAO = new ClientesDAO();
-    ConexionBD ConexionBD = new ConexionBD();
+    ConexionDB ConexionDB = new ConexionDB();
 
     int filas = 0;
 
-    /**
-     * Retorna el panel principal de la interfaz.
-     * @return JPanel principal de la GUI.
-     */
     public JPanel getMainPanel() {
         return main;
     }
 
-    /**
-     * Constructor de la clase ClientesGUI.
-     * Inicializa la interfaz, carga los datos y configura los eventos de los botones y la tabla.
-     */
     public ClientesGUI() {
         mostrar();
         textField1.setEnabled(false);
@@ -113,9 +101,6 @@ public class ClientesGUI {
         });
     }
 
-    /**
-     * Método que carga y muestra los datos de los clientes en la tabla.
-     */
     public void mostrar() {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID cliente");
@@ -126,7 +111,7 @@ public class ClientesGUI {
 
         table1.setModel(model);
         String[] dato = new String[5];
-        Connection con = ConexionBD.getConnection();
+        Connection con = ConexionDB.getConnection();
 
         try {
             Statement stat = con.createStatement();
@@ -146,18 +131,14 @@ public class ClientesGUI {
         }
     }
 
-    /**
-     * Método principal para ejecutar la aplicación.
-     * @param args Argumentos de línea de comandos.
-     */
     public static void main(String[] args) {
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.setLookAndFeel(new FlatArcDarkIJTheme());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        JFrame frame = new JFrame("Clientes de Ferreteria");
+        JFrame frame = new JFrame("Clientes");
         frame.setContentPane(new ClientesGUI().main);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();

@@ -1,25 +1,18 @@
 package Clientes;
 
-import Conexion.ConexionBD;
+import Conexion.ConexionDB;
 
 import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-/**
- * Clase ClientesDAO que maneja las operaciones de base de datos relacionadas con la tabla "clientes".
- */
 public class ClientesDAO {
 
-    private ConexionBD conexionBD = new ConexionBD();
+    private ConexionDB conexionDB = new ConexionDB();
 
-    /**
-     * Agrega un nuevo cliente a la base de datos.
-     * @param clientes Objeto de tipo Clientes con la información del nuevo cliente.
-     */
     public void agregar(Clientes clientes) {
-        Connection con = conexionBD.getConnection();
+        Connection con = conexionDB.getConnection();
         String query = "INSERT INTO clientes (nombre, telefono, direccion, correo) VALUES (?, ?, ?, ?)";
 
         try {
@@ -40,12 +33,8 @@ public class ClientesDAO {
         }
     }
 
-    /**
-     * Elimina un cliente de la base de datos dado su ID.
-     * @param id_cliente ID del cliente a eliminar.
-     */
     public void eliminar(int id_cliente) {
-        Connection con = conexionBD.getConnection();
+        Connection con = conexionDB.getConnection();
         String query = "DELETE FROM clientes WHERE id_cliente = ?";
 
         try {
@@ -63,12 +52,8 @@ public class ClientesDAO {
         }
     }
 
-    /**
-     * Actualiza la información de un cliente en la base de datos.
-     * @param clientes Objeto de tipo Clientes con los nuevos datos del cliente.
-     */
     public void actualizar(Clientes clientes) {
-        Connection con = conexionBD.getConnection();
+        Connection con = conexionDB.getConnection();
         String query = "UPDATE clientes SET nombre = ?, telefono = ?, direccion = ?, correo = ? WHERE id_cliente = ?";
 
         try {

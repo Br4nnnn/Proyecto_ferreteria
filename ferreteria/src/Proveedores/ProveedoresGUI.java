@@ -1,11 +1,14 @@
 package Proveedores;
 
-import Conexion.ConexionBD;
-import MenuP.MenuPrincipal;
+import Conexion.ConexionDB;
+import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,129 +16,134 @@ import java.sql.Statement;
 
 public class ProveedoresGUI {
     private JTable table1;
-    private JPanel panel1;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
+    private JTextField id_proveedorTextField;
+    private JTextField contactoTextField;
+    private JTextField nombreTextField;
     private JButton agregarButton;
-    private JButton actualizarButton;
     private JButton eliminarButton;
-    private JButton volverAlMenuButton;
+    private JButton actualizarButton;
+    private JPanel main;
+    private JComboBox categoriaComboBox;
+    private int filas = 0;
 
-    private proveedoresDAO proveedoresDAO = new proveedoresDAO();
-    private ConexionBD conexionBD = new ConexionBD();
+    private ProveedoresDAO proveedoresDAO = new ProveedoresDAO();
+    private ConexionDB conexionDB = new ConexionDB();
 
-    /**
-     * Constructor de la clase ProveedoresGUI.
-     *
-     * Inicializa la interfaz gráfica y configura los eventos de los botones.
-     */
+    public JPanel getMainPanel() {
+        return main; // Return the actual main panel instead of null
+    }
+
     public ProveedoresGUI() {
-        cargarProveedores();
+        id_proveedorTextField.setEnabled(false);
+        obtenerDatos();
 
         agregarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String nombre = textField2.getText();
-                String contacto = textField3.getText();
+                String nombre = nombreTextField.getText();
+                String contacto = contactoTextField.getText();
+                String categoria_producto = categoriaComboBox.getSelectedItem().toString();
 
-                Proveedores proveedores = new Proveedores(0, nombre, contacto);
+                Proveedores proveedores = new Proveedores(0, nombre, contacto, categoria_producto);
                 proveedoresDAO.agregar(proveedores);
-                cargarProveedores();
+                obtenerDatos();
+                limpiar();
             }
         });
 
         actualizarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int id_proveedor = Integer.parseInt(textField1.getText());
-                String nombre = textField2.getText();
-                String contacto = textField3.getText();
+                String nombre = nombreTextField.getText();
+                String contacto = contactoTextField.getText();
+                String categoria_producto = categoriaComboBox.getSelectedItem().toString();
+                int id_proveedor = Integer.parseInt(id_proveedorTextField.getText());
 
-                Proveedores proveedores = new Proveedores(id_proveedor, nombre, contacto);
+                Proveedores proveedores = new Proveedores(id_proveedor, nombre, contacto, categoria_producto);
                 proveedoresDAO.actualizar(proveedores);
-                cargarProveedores();
+                obtenerDatos();
+                limpiar();
             }
         });
 
         eliminarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int id_proveedor = Integer.parseInt(textField1.getText());
+                int id_proveedor = Integer.parseInt(id_proveedorTextField.getText());
                 proveedoresDAO.eliminar(id_proveedor);
-                cargarProveedores();
+                obtenerDatos();
+                limpiar();
             }
         });
 
         table1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int filaSeleccionada = table1.getSelectedRow();
-                if (filaSeleccionada >= 0) {
-                    textField1.setText(table1.getValueAt(filaSeleccionada, 0).toString());
-                    textField2.setText(table1.getValueAt(filaSeleccionada, 1).toString());
-                    textField3.setText(table1.getValueAt(filaSeleccionada, 2).toString());
+                super.mouseClicked(e);
+                int selectFila = table1.getSelectedRow();
+
+                if (selectFila >= 0) {
+                    id_proveedorTextField.setText(table1.getValueAt(selectFila, 0).toString());
+                    nombreTextField.setText(table1.getValueAt(selectFila, 1).toString());
+                    contactoTextField.setText(table1.getValueAt(selectFila, 2).toString());
+                    categoriaComboBox.setSelectedItem(table1.getValueAt(selectFila, 3).toString());
+
+                    filas = selectFila;
                 }
             }
         });
     }
 
-    /**
-     * Carga los proveedores desde la base de datos y los muestra en la tabla de la interfaz gráfica.
-     */
-    public void cargarProveedores() {
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("id_proveedor");
-        model.addColumn("nombre");
-        model.addColumn("contacto");
+    public void limpiar() {
+        id_proveedorTextField.setText("");
+        nombreTextField.setText("");
+        contactoTextField.setText("");
+        categoriaComboBox.setSelectedItem("");
+    }
 
-        table1.setModel(model);
-        String[] datos = new String[3];
-        Connection con = conexionBD.getConnection();
+    public void obtenerDatos() {
+        DefaultTableModel dtm = new DefaultTableModel();
 
-        if (con == null) {
-            System.out.println("Error: No se pudo establecer la conexión.");
-            return;
-        }
+        dtm.addColumn("Id_proveedor");
+        dtm.addColumn("Nombre");
+        dtm.addColumn("Contacto");
+        dtm.addColumn("Categoría_producto");
+
+        table1.setModel(dtm);
+        Object[] dato = new Object[4];
+        Connection con = conexionDB.getConnection();
 
         try {
-            Statement stat = con.createStatement();
+            Statement stmt = con.createStatement();
             String query = "SELECT * FROM proveedores";
-            ResultSet rs = stat.executeQuery(query);
+            ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
-                datos[0] = rs.getString(1);
-                datos[1] = rs.getString(2);
-                datos[2] = rs.getString(3);
-                model.addRow(datos);
+                dato[0] = rs.getInt(1);
+                dato[1] = rs.getString(2);
+                dato[2] = rs.getString(3);
+                dato[3] = rs.getString(4);
+                dtm.addRow(dato);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        volverAlMenuButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFrame jFrame = (JFrame) SwingUtilities.getWindowAncestor(volverAlMenuButton);
-                jFrame.dispose();
-                MenuPrincipal menuPrincipal = new MenuPrincipal();
-                menuPrincipal.main(null);
-            }
-        });
     }
 
-    /**
-     * Método principal que inicia la aplicación de gestión de empleados.
-     *
-     * @param args Argumentos de la línea de comandos (no utilizados).
-     */
     public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel(new FlatArcDarkIJTheme());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         JFrame frame = new JFrame("Gestión de Proveedores");
-        frame.setContentPane(new ProveedoresGUI().panel1);
+        frame.setContentPane(new ProveedoresGUI().main);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-        frame.setSize(880, 650);
+        frame.setSize(1006,550);
+        frame.setLocationRelativeTo(null);
         frame.setResizable(false);
     }
 }
