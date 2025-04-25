@@ -243,7 +243,6 @@
             <properties>
               <background color="-16220934"/>
               <font name="JetBrains Mono"/>
-              <icon value=""/>
               <text value="Regresar"/>
             </properties>
           </component>
