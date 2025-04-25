@@ -29,7 +29,7 @@
         </constraints>
         <properties>
           <font name="JetBrains Mono"/>
-          <text value="ID Empleado"/>
+          <text value="ID Empleado:"/>
         </properties>
       </component>
       <component id="16048" class="javax.swing.JTextField" binding="ID">
@@ -49,7 +49,7 @@
         </constraints>
         <properties>
           <font name="JetBrains Mono"/>
-          <text value="Nombre"/>
+          <text value="Nombre:"/>
         </properties>
       </component>
       <component id="58630" class="javax.swing.JTextField" binding="Nombre">
@@ -68,7 +68,7 @@
         </constraints>
         <properties>
           <font name="JetBrains Mono"/>
-          <text value="Cargo"/>
+          <text value="Cargo:"/>
         </properties>
       </component>
       <component id="81893" class="javax.swing.JLabel">
@@ -77,7 +77,7 @@
         </constraints>
         <properties>
           <font name="JetBrains Mono"/>
-          <text value="Salario"/>
+          <text value="Salario:"/>
         </properties>
       </component>
       <component id="5af1b" class="javax.swing.JTextField" binding="Salario">

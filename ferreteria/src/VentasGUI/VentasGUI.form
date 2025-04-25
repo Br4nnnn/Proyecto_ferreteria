@@ -511,7 +511,7 @@
           <background color="-8356225"/>
           <font name="JetBrains Mono"/>
           <horizontalAlignment value="0"/>
-          <text value="Realizar Venta"/>
+          <text value="Realizar la Venta"/>
         </properties>
       </component>
     </children>

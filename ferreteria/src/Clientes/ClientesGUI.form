@@ -31,7 +31,7 @@
         </constraints>
         <properties>
           <font name="JetBrains Mono"/>
-          <text value="ID Cliente"/>
+          <text value="ID Cliente:"/>
         </properties>
       </component>
       <component id="3af60" class="javax.swing.JLabel">
@@ -40,7 +40,7 @@
         </constraints>
         <properties>
           <font name="JetBrains Mono"/>
-          <text value="Nombre"/>
+          <text value="Nombre:"/>
         </properties>
       </component>
       <component id="2d995" class="javax.swing.JLabel">
@@ -49,7 +49,7 @@
         </constraints>
         <properties>
           <font name="JetBrains Mono"/>
-          <text value="Teléfono"/>
+          <text value="Teléfono:"/>
         </properties>
       </component>
       <component id="229ed" class="javax.swing.JLabel">
@@ -58,7 +58,7 @@
         </constraints>
         <properties>
           <font name="JetBrains Mono"/>
-          <text value="Dirección"/>
+          <text value="Dirección:"/>
         </properties>
       </component>
       <component id="f26ea" class="javax.swing.JLabel">
@@ -67,7 +67,7 @@
         </constraints>
         <properties>
           <font name="JetBrains Mono"/>
-          <text value="Correo"/>
+          <text value="Correo:"/>
         </properties>
       </component>
       <component id="24ff9" class="javax.swing.JTextField" binding="textField1" default-binding="true">

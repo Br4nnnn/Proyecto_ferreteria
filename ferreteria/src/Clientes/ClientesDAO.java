@@ -34,7 +34,7 @@ public class ClientesDAO {
     }
 
     public void eliminar(int id_cliente) {
-        Connection con = conexionDB.getConnection();
+        Connection con = ConexionDB.getConnection();
         String query = "DELETE FROM clientes WHERE id_cliente = ?";
 
         try {
@@ -53,7 +53,7 @@ public class ClientesDAO {
     }
 
     public void actualizar(Clientes clientes) {
-        Connection con = conexionDB.getConnection();
+        Connection con = ConexionDB.getConnection();
         String query = "UPDATE clientes SET nombre = ?, telefono = ?, direccion = ?, correo = ? WHERE id_cliente = ?";
 
         try {

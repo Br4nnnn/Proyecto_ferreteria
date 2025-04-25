@@ -257,7 +257,7 @@ public class VentasGUI extends JFrame {
                     String estado = (String) estado1.getSelectedItem();
 
                     // Registrar orden de compra
-                    Connection con = conexionBD.getConnection();
+                    Connection con = ConexionDB.getConnection();
                     PreparedStatement stmt = null;
                     ResultSet rs = null;
                     int id_orden = 0;
@@ -428,7 +428,7 @@ public class VentasGUI extends JFrame {
         subtotalf.setText("");
     }
 
-    ConexionDB conexionBD = new ConexionDB();
+    ConexionDB ConexionBD = new ConexionDB();
 
     public void obtener_datos_producto() {
         DefaultTableModel model = new DefaultTableModel();
@@ -535,7 +535,7 @@ public class VentasGUI extends JFrame {
     }
 
     public void actualizarInventario(int idProducto, int cantidadVendida) {
-        Connection con = conexionBD.getConnection();
+        Connection con = ConexionBD.getConnection();
         PreparedStatement stmt = null;
 
         try {
@@ -567,7 +567,7 @@ public class VentasGUI extends JFrame {
     }
 
     public void restaurarInventario(int idProducto, int cantidad) {
-        Connection con = conexionBD.getConnection();
+        Connection con = ConexionBD.getConnection();
         PreparedStatement stmt = null;
 
         try {
@@ -619,7 +619,7 @@ public class VentasGUI extends JFrame {
         ResultSet rs = null;
 
         try {
-            con = conexionBD.getConnection();
+            con = ConexionBD.getConnection();
             String idClienteStr = idcliente.getText();
 
             // Adaptado a la estructura de la base de datos
@@ -666,7 +666,7 @@ public class VentasGUI extends JFrame {
         ResultSet rs = null;
 
         try {
-            con = conexionBD.getConnection();
+            con = ConexionBD.getConnection();
             String idEmpleadoStr = idempleado.getText();
 
             // Adaptado a la estructura de la base de datos

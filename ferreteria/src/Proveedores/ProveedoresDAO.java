@@ -8,10 +8,10 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class ProveedoresDAO {
-    private ConexionDB conexionDB = new ConexionDB();
+    private ConexionDB ConexionDB = new ConexionDB();
 
     public void agregar(Proveedores proveedores) {
-        Connection con = conexionDB.getConnection();
+        Connection con = ConexionDB.getConnection();
         String query = "INSERT INTO proveedores (nombre, contacto, categoria_producto) VALUES (?, ?, ?)";
 
         try {
@@ -29,7 +29,7 @@ public class ProveedoresDAO {
     }
 
     public void eliminar(int id_proveedor) {
-        Connection con = conexionDB.getConnection();
+        Connection con = ConexionDB.getConnection();
         String query = "DELETE FROM proveedores WHERE id_proveedor = ?";
 
         try {
@@ -45,7 +45,7 @@ public class ProveedoresDAO {
     }
 
     public void actualizar(Proveedores proveedores) {
-        Connection con = conexionDB.getConnection();
+        Connection con = ConexionDB.getConnection();
         String query = "UPDATE proveedores SET nombre = ?, contacto = ?, categoria_producto = ? WHERE id_proveedor = ?";
 
         try {

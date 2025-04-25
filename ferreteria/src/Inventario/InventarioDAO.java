@@ -9,10 +9,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class InventarioDAO {
-    private ConexionDB conexionDB = new ConexionDB();
+    private ConexionDB ConexionDB = new ConexionDB();
 
     public void agregar(Inventario inventario) {
-        Connection con = conexionDB.getConnection();
+        Connection con = ConexionDB.getConnection();
 
         try {
             // Verificar si el proveedor existe (si se proporciona)
@@ -63,7 +63,7 @@ public class InventarioDAO {
     public DefaultComboBoxModel<String> cargarProveedores() {
         // Creamos un modelo para el JComboBox que contendrá, por ejemplo, "id - nombre"
         DefaultComboBoxModel<String> comboModel = new DefaultComboBoxModel<>();
-        Connection con = conexionDB.getConnection();
+        Connection con = ConexionDB.getConnection();
         String query = "SELECT id_proveedor, nombre FROM proveedores";
         try (PreparedStatement ps = con.prepareStatement(query);
              ResultSet rs = ps.executeQuery()) {
@@ -82,7 +82,7 @@ public class InventarioDAO {
 
 
     public void eliminar(int id_producto) {
-        Connection con = conexionDB.getConnection();
+        Connection con = ConexionDB.getConnection();
 
         try {
             // Consulta para eliminar producto
@@ -109,7 +109,7 @@ public class InventarioDAO {
     }
 
     public void actualizar(Inventario inventario) {
-        Connection con = conexionDB.getConnection();
+        Connection con = ConexionDB.getConnection();
 
         try {
             // Verificar si el proveedor existe (si se proporciona)
@@ -160,7 +160,7 @@ public class InventarioDAO {
     }
 
     private boolean validarProveedor(int id_proveedor) {
-        Connection con = conexionDB.getConnection();
+        Connection con = ConexionDB.getConnection();
 
         try {
             // Consulta para contar proveedores con el ID especificado

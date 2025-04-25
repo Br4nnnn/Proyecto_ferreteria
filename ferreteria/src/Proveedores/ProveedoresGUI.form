@@ -16,7 +16,7 @@
         </constraints>
         <properties>
           <font name="JetBrains Mono"/>
-          <text value="ID Proveedor"/>
+          <text value="ID Proveedor:"/>
         </properties>
       </component>
       <component id="1e2b" class="javax.swing.JTextField" binding="id_proveedorTextField">
@@ -36,7 +36,7 @@
         </constraints>
         <properties>
           <font name="JetBrains Mono"/>
-          <text value="Nombre"/>
+          <text value="Nombre:"/>
         </properties>
       </component>
       <component id="1b5ac" class="javax.swing.JTextField" binding="nombreTextField">
@@ -56,7 +56,7 @@
         </constraints>
         <properties>
           <font name="JetBrains Mono"/>
-          <text value="Contacto"/>
+          <text value="Contacto:"/>
         </properties>
       </component>
       <component id="9c456" class="javax.swing.JTextField" binding="contactoTextField" default-binding="true">
@@ -76,7 +76,7 @@
         </constraints>
         <properties>
           <font name="JetBrains Mono"/>
-          <text value="Categoría"/>
+          <text value="Categoría:"/>
         </properties>
       </component>
       <component id="c429b" class="javax.swing.JLabel">
@@ -85,7 +85,7 @@
         </constraints>
         <properties>
           <font name="JetBrains Mono"/>
-          <text value="Acciones"/>
+          <text value="Acciones:"/>
         </properties>
       </component>
       <component id="45ac" class="javax.swing.JButton" binding="agregarButton" default-binding="true">
