@@ -29,7 +29,6 @@ public class ReportesGUI extends JFrame {
     private JTable reportesTable;
     private JButton regresarButton;
     private JButton salirButton;
-    private JButton exportarPDFButton;
     private JSpinner parametroSpinner;
     private JLabel parametroLabel;
 
@@ -59,7 +58,7 @@ public class ReportesGUI extends JFrame {
         this.conexion = conexion;
 
         setContentPane(main);
-        setTitle("Sistema de Reportes - Ferretería");
+        setTitle("Reportes");
         setSize(800, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -348,25 +347,6 @@ public class ReportesGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 limpiarFormulario();
-            }
-        });
-
-        exportarPDFButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String tipoReporte = (String) tipoReporteComboBox.getSelectedItem();
-                if (tipoReporte.equals("Seleccione un tipo de reporte")) {
-                    JOptionPane.showMessageDialog(ReportesGUI.this,
-                            "Por favor, primero genere un reporte para exportar",
-                            "Advertencia", JOptionPane.WARNING_MESSAGE);
-                    return;
-                }
-
-                // Asegurarse de que nombreEmpleadoSeleccionado esté actualizado
-                actualizarNombreEmpleadoSeleccionado();
-
-                // Llamar al método exportar con el nombre del empleado
-                reportesImpl.exportarReporteActualAPDF(tipoReporte, nombreEmpleadoSeleccionado);
             }
         });
 

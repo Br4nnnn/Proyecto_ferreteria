@@ -1,10 +1,8 @@
 package Orden_Compras;
 
-import Conexion.ConexionDB;
-import PruebaMenu.MenuPrueba;
-import com.itextpdf.text.*;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Image;
+import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -17,16 +15,14 @@ import javax.mail.internet.MimeMultipart;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.*;
 import java.text.SimpleDateFormat;
-import java.util.*;
 import java.util.Date;
+import java.util.*;
 
 
 public class OrdenesCompraGUI {
@@ -47,11 +43,6 @@ public class OrdenesCompraGUI {
     private JTextField filtroTextField;
     private JButton buscarButton;
     private JButton limpiarFiltrosButton;
-    private JButton volverAlMenúButton;
-    private JButton enviarCorreoButton;
-
-    ConexionDB ConexionDB = new ConexionDB();
-
     private static final double IVA_RATE = 0.19;
     private void addEmptyLine(Paragraph paragraph, int number) {
         for (int i = 0; i < number; i++) {
@@ -273,29 +264,6 @@ public class OrdenesCompraGUI {
 
         // Listener para el campo de ID de orden
         configurarListenerIdOrden();
-
-        // Limpiar campos inicialmente
-        limpiarCampos();
-        enviarCorreoButton.addActionListener(e -> {
-            if (idOrdenCompra.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Por favor, seleccione una orden para enviar la factura");
-                return;
-            }
-
-            String destinatario = JOptionPane.showInputDialog("Ingrese el correo del destinatario:");
-            if (destinatario != null && !destinatario.trim().isEmpty()) {
-                String rutaArchivo = System.getProperty("user.home") + File.separator + "Downloads" + File.separator + "Factura_" + idOrdenCompra.getText() + ".pdf";
-                enviarFacturaPorCorreo(destinatario, "Factura de Compra", "Future soft.", rutaArchivo);
-            }
-        });
-        volverAlMenúButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFrame jFrame = (JFrame) SwingUtilities.getWindowAncestor(volverAlMenúButton);
-                jFrame.dispose();
-                MenuPrueba.main(null);
-            }
-        });
     }
 
     private void configurarListenerTabla() {
