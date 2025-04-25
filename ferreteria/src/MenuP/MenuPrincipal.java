@@ -1,5 +1,6 @@
 package MenuP;
 
+import Chat.Launcher;
 import Clientes.ClientesGUI;
 import Empleados.EmpleadosGUI;
 import Inventario_productos.Inventario_productosGUI;
@@ -22,6 +23,7 @@ public class MenuPrincipal {
     private JButton inventariosMenu;
     private JButton ordenesCompraMenu;
     private JButton proveedoresMenu;
+    private JButton chatMenu;
 
     public MenuPrincipal(){
         aplicarEstiloBasico(clientesMenu);
@@ -75,6 +77,15 @@ public class MenuPrincipal {
                 Ordenes_compraGUI.main(null);
             }
         });
+        chatMenu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame jFrame = (JFrame) SwingUtilities.getWindowAncestor(chatMenu);
+                jFrame.dispose();
+                Launcher.main(null);
+            }
+        });
+
     }
 
     private void aplicarEstiloBasico(JButton boton) {
