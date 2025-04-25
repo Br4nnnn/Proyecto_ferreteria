@@ -1,9 +1,9 @@
 package Orden_Compras;
 
 import PruebaMenu.MenuPrueba;
-import com.itextpdf.text.*;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Image;
+import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -24,8 +24,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.*;
 import java.text.SimpleDateFormat;
-import java.util.*;
 import java.util.Date;
+import java.util.*;
 
 
 public class OrdenesCompraGUI {
@@ -268,6 +268,14 @@ public class OrdenesCompraGUI {
 
         // Listener para el campo de ID de orden
         configurarListenerIdOrden();
+        volverAlMenúButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame jFrame = (JFrame) SwingUtilities.getWindowAncestor(volverAlMenúButton);
+                jFrame.dispose();
+                MenuPrueba.main(null);
+            }
+        });
         volverAlMenúButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -669,10 +677,8 @@ public class OrdenesCompraGUI {
             // Título y datos de la empresa
             Paragraph titulo = new Paragraph();
             addEmptyLine(titulo, 5); // Espacio para el logo
-            titulo.add(new Paragraph("FERRETERÍA Future soft", fontTitulo));
-            titulo.add(new Paragraph("NIT: 900.123.456-7", fontNormal));
-            titulo.add(new Paragraph("Sede Sagrado", fontNormal));
-            titulo.add(new Paragraph("Teléfono: (57) 123-4567", fontNormal));
+            titulo.add(new Paragraph("Ferretería Venta de ferreterías", fontTitulo));
+            titulo.add(new Paragraph("Número de teléfono 1001-10393101", fontNormal));
             titulo.add(new Paragraph("Email: contacto@ferreteriafuturesotf.com", fontNormal));
             titulo.setAlignment(Element.ALIGN_RIGHT);
             documento.add(titulo);

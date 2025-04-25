@@ -257,11 +257,8 @@ public class ReportesDAO {
             // Título y datos de la empresa
             Paragraph titulo = new Paragraph();
             addEmptyLine(titulo, 5); // Espacio para el logo
-            titulo.add(new Paragraph("FERRETERÍA Future soft", fontTitulo));
-            titulo.add(new Paragraph("NIT: 900.123.456-7", fontNormal));
-            titulo.add(new Paragraph("Sede Sagrado", fontNormal));
-            titulo.add(new Paragraph("Teléfono: (57) 123-4567", fontNormal));
-            titulo.add(new Paragraph("Email: contacto@ferreteriafuturesotf.com", fontNormal));
+            titulo.add(new Paragraph("Ferretería Venta de Ferreterías", fontTitulo));
+            titulo.add(new Paragraph("Número: 1001-130013901", fontNormal));
             titulo.setAlignment(Element.ALIGN_RIGHT);
             documento.add(titulo);
 

@@ -25,10 +25,8 @@ public class ReportesGUI extends JFrame {
     private JComboBox<String> empleadoComboBox;
     private JTextArea descripcionTextArea;
     private JButton generarReporteButton;
-    private JButton limpiarButton;
     private JTable reportesTable;
-    private JButton regresarButton;
-    private JButton salirButton;
+    private JButton volverButton;
     private JSpinner parametroSpinner;
     private JLabel parametroLabel;
 
@@ -106,10 +104,6 @@ public class ReportesGUI extends JFrame {
             tipoReporteComboBox.addItem("Stock Bajo");
             tipoReporteComboBox.addItem("Reporte Personalizado");
         }
-
-        // Configurar el spinner para parámetros
-        parametroSpinner = new JSpinner(new SpinnerNumberModel(5, 1, 100, 1));
-        parametroLabel = new JLabel("Límite de registros:");
 
         // Añadir estos componentes al panel, aunque no están definidos en el código original
         // Tendrías que añadirlos a tu diseño de GUI
@@ -340,21 +334,6 @@ public class ReportesGUI extends JFrame {
 
                 // Registrar que se generó un reporte
                 guardarRegistroReporte(tipoReporte);
-            }
-        });
-
-        limpiarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                limpiarFormulario();
-            }
-        });
-
-        regresarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                // Aquí puedes abrir la ventana anterior si es necesario
             }
         });
 
