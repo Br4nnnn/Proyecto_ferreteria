@@ -25,10 +25,8 @@ import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
 public class MenuPrueba {
     // Componentes principales de la interfaz gráfica
     public JPanel mainPanel; // Panel principal que contiene todos los elementos
-    public JPanel menuPanel; // Panel lateral del menú
     public JPanel contentPanel; // Panel para mostrar el contenido de los módulos
     public JPanel welcomePanel; // Panel de bienvenida
-    public JLabel lblTitulo; // Etiqueta para el título
     public JButton btnInventario; // Botón para acceder al módulo de inventario
     public JButton btnClientes; // Botón para acceder al módulo de clientes
     public JButton btnEmpleados; // Botón para acceder al módulo de empleados
