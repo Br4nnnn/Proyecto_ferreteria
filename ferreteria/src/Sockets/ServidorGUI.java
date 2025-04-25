@@ -67,10 +67,10 @@ public class ServidorGUI {
 
     public void iniciar(){
         try (ServerSocket serverSocket = new ServerSocket(12345)){
-            JOptionPane.showMessageDialog(null, "Servidor iniciado con éxito");
+            JOptionPane.showMessageDialog(null, "Servidor iniciado");
             do {
                 clientSocket = serverSocket.accept();
-                actualizarTextArea("Cliente Conectado al chat.\n");
+                actualizarTextArea("Se ha conectado el cliente.\n");
 
                 //Leyendo los mensajes que llegan del cliente al server y viceversa
                 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
@@ -80,7 +80,7 @@ public class ServidorGUI {
 
             } while (true);
         } catch (IOException e){
-            JOptionPane.showMessageDialog(null, "Ha ocurrido un error en el servidor", "Error", ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error del servidor", "Error: ", ERROR_MESSAGE);
         }
     }
 
@@ -92,7 +92,7 @@ public class ServidorGUI {
                 actualizarTextArea("Servidor: " + mensaje + "\n");
                 textField1.setText("");
             } else {
-                showMessageDialog(null, "No se pudo establecer conexión con el cliente...");
+                showMessageDialog(null, "Error al conectar con el cliente");
             }
         }
     }
@@ -108,7 +108,7 @@ public class ServidorGUI {
             String recievedMessage;
             while ((recievedMessage = in.readLine()) != null) {
                 if (recievedMessage.equalsIgnoreCase("salir")) {
-                    actualizarTextArea("Cliente ha abandonado el chat\n");
+                    actualizarTextArea("El cliente abandonó la conversación.\n");
                     break;
                 }
                 actualizarTextArea("Cliente: " + recievedMessage + "\n");
@@ -119,12 +119,12 @@ public class ServidorGUI {
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Servidor de Chat");
+        JFrame frame = new JFrame("Chat del Servidor");
         ServidorGUI servidorGUI = new ServidorGUI();
         frame.setContentPane(servidorGUI.main);
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // Comentado por alguna razón
         frame.pack();
-        frame.setSize(600, 350);
+        frame.setSize(800, 600);
         frame.setVisible(true);
     }
 }

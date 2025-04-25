@@ -1,8 +1,9 @@
 package Orden_Compras;
 
+import PruebaMenu.MenuPrueba;
+import com.itextpdf.text.*;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Image;
-import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -15,14 +16,16 @@ import javax.mail.internet.MimeMultipart;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.*;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.*;
+import java.util.Date;
 
 
 public class OrdenesCompraGUI {
@@ -43,6 +46,7 @@ public class OrdenesCompraGUI {
     private JTextField filtroTextField;
     private JButton buscarButton;
     private JButton limpiarFiltrosButton;
+    private JButton volverAlMenúButton;
     private static final double IVA_RATE = 0.19;
     private void addEmptyLine(Paragraph paragraph, int number) {
         for (int i = 0; i < number; i++) {
@@ -264,6 +268,14 @@ public class OrdenesCompraGUI {
 
         // Listener para el campo de ID de orden
         configurarListenerIdOrden();
+        volverAlMenúButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame jFrame = (JFrame) SwingUtilities.getWindowAncestor(volverAlMenúButton);
+                jFrame.dispose();
+                MenuPrueba.main(null);
+            }
+        });
     }
 
     private void configurarListenerTabla() {

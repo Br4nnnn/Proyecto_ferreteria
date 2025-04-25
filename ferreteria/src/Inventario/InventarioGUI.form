@@ -107,7 +107,7 @@
           <background color="-12039347"/>
           <font name="JetBrains Mono"/>
           <foreground color="-1"/>
-          <text value="Volver al menú principal"/>
+          <text value="Volver al menú"/>
         </properties>
       </component>
       <component id="99a59" class="javax.swing.JButton" binding="agregarButton">

@@ -168,7 +168,7 @@
           <background color="-8356225"/>
           <enabled value="true"/>
           <foreground color="-329479"/>
-          <text value="Volver"/>
+          <text value="Volver al menú"/>
         </properties>
       </component>
     </children>

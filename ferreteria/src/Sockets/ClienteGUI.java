@@ -30,7 +30,7 @@ public class ClienteGUI {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // Solicitar dirección IP del servidor
-                    String serverAddress = JOptionPane.showInputDialog("Ingrese la IP del servidor (localhost si es local):");
+                    String serverAddress = JOptionPane.showInputDialog("Ingresa la IP del servidor");
                     if (serverAddress == null || serverAddress.isEmpty()) {
                         serverAddress = "localhost";  // Valor por defecto
                     }
@@ -67,7 +67,7 @@ public class ClienteGUI {
                 actualizarTextArea("Cliente: " + mensaje + "\n");
                 textField1.setText(""); // Limpiar el campo de texto
             } else {
-                actualizarTextArea("Error: No estás conectado al servidor.\n");
+                actualizarTextArea("No conectado.\n");
             }
         }
     }
@@ -91,8 +91,7 @@ public class ClienteGUI {
         try {
             // Instanciar, Crear socket y conectar al servidor al puerto 12345
             socket = new Socket(serverAddress, 12345);
-            actualizarTextArea("Conectado al servidor.\n");
-            actualizarTextArea("Bienvenido a nuestro chat apreciado cliente \n, ¿En qué le podemos servir?");
+            actualizarTextArea("Te has conectado\n");
 
             // Configurar flujos de entrada/salida
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -111,12 +110,12 @@ public class ClienteGUI {
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Cliente chat");
+        JFrame frame = new JFrame("Chat de Cliente");
         ClienteGUI clienteGUI = new ClienteGUI();
         frame.setContentPane(clienteGUI.mainPanel);
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // Comentado por alguna razón
         frame.pack();
-        frame.setSize(600, 400);
+        frame.setSize(800, 600);
         frame.setVisible(true);
     }
 
