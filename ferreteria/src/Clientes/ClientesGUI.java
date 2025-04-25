@@ -1,6 +1,7 @@
 package Clientes;
 
 import Conexion.ConexionDB;
+import PruebaMenu.MenuPrueba;
 import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
 
 import javax.swing.*;
@@ -25,6 +26,7 @@ public class ClientesGUI {
     private JButton agregarButton;
     private JButton eliminarButton;
     private JButton actualizarButton;
+    private JButton volverButton;
     private JButton volverAlMenuButton;
 
     ClientesDAO ClientesDAO = new ClientesDAO();
@@ -96,6 +98,14 @@ public class ClientesGUI {
 
                     filas = selectFila;
                 }
+            }
+        });
+        volverButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame jFrame = (JFrame) SwingUtilities.getWindowAncestor(volverButton);
+                jFrame.dispose();
+                MenuPrueba.main(null);
             }
         });
     }

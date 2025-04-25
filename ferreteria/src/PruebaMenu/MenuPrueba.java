@@ -52,7 +52,7 @@ public class MenuPrueba {
             int lblWidth = lblWelcomeImage.getWidth();
             int lblHeight = lblWelcomeImage.getHeight();
             // Cargar la imagen desde el archivo
-            ImageIcon imagenFondo = new ImageIcon("Resources/Img/fondo_ferreteria.png");
+            ImageIcon imagenFondo = new ImageIcon("ferreteria/Resources/Img/fondo_ferreteria.png");
             // Redimensionar la imagen si es necesario
             Image img = imagenFondo.getImage();
             // Ajustar al tamaño que necesites (puedes ajustar estos valores)
@@ -70,14 +70,7 @@ public class MenuPrueba {
         salirButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int respuesta = JOptionPane.showConfirmDialog(mainPanel,
-                        "¿Estás seguro de que deseas salir?",
-                        "Confirmar salida",
-                        JOptionPane.YES_NO_OPTION,
-                        JOptionPane.QUESTION_MESSAGE);
-                if (respuesta == JOptionPane.YES_OPTION) {
                     System.exit(0);
-                }
             }
         });
     }

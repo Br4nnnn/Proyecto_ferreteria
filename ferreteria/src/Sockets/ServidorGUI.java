@@ -1,5 +1,7 @@
 package Sockets;
 
+import PruebaMenu.MenuPrueba;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,6 +23,7 @@ public class ServidorGUI {
     private JButton enviarButton;
     private JTextField textField1;
     private JButton iniciarServidorButton;
+    private JButton volverAlMenúButton;
 
     private PrintWriter out;
     private Socket clientSocket;
@@ -50,6 +53,14 @@ public class ServidorGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new Thread(() -> iniciar()).start();
+            }
+        });
+        volverAlMenúButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame jFrame = (JFrame) SwingUtilities.getWindowAncestor(volverAlMenúButton);
+                jFrame.dispose();
+                MenuPrueba.main(null);
             }
         });
     }

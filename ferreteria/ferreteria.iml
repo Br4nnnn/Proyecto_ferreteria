@@ -76,5 +76,6 @@
     <orderEntry type="library" name="javax.mail-1.6.2" level="project" />
     <orderEntry type="library" name="javax.mail-api-1.6.2" level="project" />
     <orderEntry type="library" name="itextpdf-5.5.13.3" level="project" />
+    <orderEntry type="library" name="mysql.connector.java" level="project" />
   </component>
 </module>

@@ -1,6 +1,7 @@
 package Empleados;
 
 import Conexion.ConexionDB;
+import PruebaMenu.MenuPrueba;
 import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
 
 import javax.swing.*;
@@ -32,6 +33,7 @@ public class EmpleadosGUI {
     private JButton eliminarButton;
 
     private JComboBox comboBox1;
+    private JButton volverAlMenúButton;
     private JButton volverButton;
 
     int filas = 0;
@@ -99,6 +101,14 @@ public class EmpleadosGUI {
 
                     filas = selectFila;
                 }
+            }
+        });
+        volverAlMenúButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame jFrame = (JFrame) SwingUtilities.getWindowAncestor(volverAlMenúButton);
+                jFrame.dispose();
+                MenuPrueba.main(null);
             }
         });
     }

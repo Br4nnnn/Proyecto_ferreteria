@@ -1,6 +1,7 @@
 package Proveedores;
 
 import Conexion.ConexionDB;
+import PruebaMenu.MenuPrueba;
 import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
 
 import javax.swing.*;
@@ -24,6 +25,7 @@ public class ProveedoresGUI {
     private JButton actualizarButton;
     private JPanel main;
     private JComboBox categoriaComboBox;
+    private JButton volverAlMenúButton;
     private int filas = 0;
 
     private ProveedoresDAO proveedoresDAO = new ProveedoresDAO();
@@ -90,6 +92,14 @@ public class ProveedoresGUI {
 
                     filas = selectFila;
                 }
+            }
+        });
+        volverAlMenúButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame jFrame = (JFrame) SwingUtilities.getWindowAncestor(volverAlMenúButton);
+                jFrame.dispose();
+                MenuPrueba.main(null);
             }
         });
     }
