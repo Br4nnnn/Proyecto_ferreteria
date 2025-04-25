@@ -9,6 +9,8 @@ import Proveedores.ProveedoresGUI;
 import Reportes.ReportesGUI;
 import Sockets.ServidorGUI;
 import VentasGUI.VentasGUI;
+import MenuP.FondoPanel;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,6 +40,8 @@ public class MenuPrueba {
     private JButton chatButton; // Botón para acceder al módulo de chat
     private JButton salirButton;
 
+
+
     private boolean menuVisible = true; // Estado de visibilidad del menú lateral
     private Map<String, JPanel> panelCache = new HashMap<>(); // Caché de paneles cargados
     private Map<String, Object> instanceCache = new HashMap<>(); // Caché de instancias de módulos
@@ -46,6 +50,24 @@ public class MenuPrueba {
         // Configurar el contentPanel con CardLayout para gestionar diferentes vistas
         contentPanel.setLayout(new CardLayout());
         contentPanel.add(welcomePanel, "welcome");
+        // Hacer el welcomePanel y sus hijos transparentes para que se vea el fondo
+        welcomePanel.setOpaque(false);
+        contentPanel.setOpaque(false);
+        mainPanel.setOpaque(false); // Aunque ya usamos FondoPanel, por seguridad
+
+// Hacer también transparentes los paneles internos si existen
+        for (Component c : welcomePanel.getComponents()) {
+            if (c instanceof JPanel) {
+                ((JPanel) c).setOpaque(false);
+            }
+        }
+
+        // Reemplazar visualmente el fondo con FondoPanel
+        FondoPanel fondo = new FondoPanel();
+        fondo.setLayout(new BorderLayout());
+        fondo.add(mainPanel); // Tu mainPanel se convierte en "contenido" del panel con fondo
+        mainPanel = fondo;
+
 
         try {
             // Obtener el tamaño del JLabel
@@ -70,7 +92,7 @@ public class MenuPrueba {
         salirButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                    System.exit(0);
+                System.exit(0);
             }
         });
     }
@@ -241,6 +263,7 @@ public class MenuPrueba {
             JFrame frame = new JFrame("Menú - Ferretería");
             MenuPrueba app = new MenuPrueba();
             frame.setContentPane(app.mainPanel);
+            frame.setContentPane(app.mainPanel);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.pack();
             frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -248,3 +271,6 @@ public class MenuPrueba {
         });
     }
 }
+
+
+
