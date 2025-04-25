@@ -49,10 +49,10 @@
                   <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <font name="JetBrains Mono" size="28" style="1"/>
-                  <foreground color="-16777216"/>
+                  <font name="Arial Black" size="36" style="1"/>
+                  <foreground color="-16250614"/>
                   <horizontalAlignment value="0"/>
-                  <text value="Menú Ferretería &quot;Venta de Ferreterías&quot;"/>
+                  <text value="Ferreteria el vera"/>
                 </properties>
               </component>
               <grid id="f055f" layout-manager="GridLayoutManager" row-count="4" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -68,11 +68,11 @@
                       <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-15066598"/>
+                      <background color="-5130305"/>
                       <borderPainted value="false"/>
                       <focusPainted value="false"/>
                       <font name="JetBrains Mono" size="14"/>
-                      <foreground color="-458761"/>
+                      <foreground color="-16250614"/>
                       <horizontalAlignment value="0"/>
                       <horizontalTextPosition value="11"/>
                       <iconTextGap value="10"/>
@@ -85,11 +85,11 @@
                       <grid row="1" column="1" row-span="2" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-15066598"/>
+                      <background color="-5130305"/>
                       <borderPainted value="false"/>
                       <focusPainted value="false"/>
                       <font name="JetBrains Mono" size="14"/>
-                      <foreground color="-458761"/>
+                      <foreground color="-16055278"/>
                       <horizontalAlignment value="0"/>
                       <iconTextGap value="10"/>
                       <margin top="2" left="15" bottom="2" right="2"/>
@@ -101,11 +101,11 @@
                       <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-15066598"/>
+                      <background color="-5130305"/>
                       <borderPainted value="false"/>
                       <focusPainted value="false"/>
                       <font name="JetBrains Mono" size="14"/>
-                      <foreground color="-458761"/>
+                      <foreground color="-16250614"/>
                       <horizontalAlignment value="0"/>
                       <iconTextGap value="10"/>
                       <margin top="2" left="15" bottom="2" right="2"/>
@@ -117,11 +117,11 @@
                       <grid row="1" column="2" row-span="3" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-15066598"/>
+                      <background color="-5130305"/>
                       <borderPainted value="false"/>
                       <focusPainted value="false"/>
                       <font name="JetBrains Mono" size="14"/>
-                      <foreground color="-458761"/>
+                      <foreground color="-16055278"/>
                       <horizontalAlignment value="0"/>
                       <iconTextGap value="10"/>
                       <margin top="2" left="15" bottom="2" right="2"/>
@@ -133,11 +133,11 @@
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-15066598"/>
+                      <background color="-5130305"/>
                       <borderPainted value="false"/>
                       <focusPainted value="false"/>
                       <font name="JetBrains Mono" size="14"/>
-                      <foreground color="-458761"/>
+                      <foreground color="-16250614"/>
                       <horizontalAlignment value="0"/>
                       <iconTextGap value="10"/>
                       <margin top="2" left="15" bottom="2" right="2"/>
@@ -149,11 +149,11 @@
                       <grid row="1" column="0" row-span="2" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-15066598"/>
+                      <background color="-5130305"/>
                       <borderPainted value="false"/>
                       <focusPainted value="false"/>
                       <font name="JetBrains Mono" size="14"/>
-                      <foreground color="-458761"/>
+                      <foreground color="-16055278"/>
                       <horizontalAlignment value="0"/>
                       <iconTextGap value="10"/>
                       <margin top="2" left="15" bottom="2" right="2"/>
@@ -165,9 +165,9 @@
                       <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="2" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-15066598"/>
+                      <background color="-5130305"/>
                       <font name="JetBrains Mono" size="14"/>
-                      <foreground color="-458761"/>
+                      <foreground color="-14614299"/>
                       <horizontalAlignment value="0"/>
                       <text value="Chat"/>
                     </properties>
@@ -177,11 +177,11 @@
                       <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="2" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-15066598"/>
+                      <background color="-5130305"/>
                       <borderPainted value="false"/>
                       <focusPainted value="false"/>
                       <font name="JetBrains Mono" size="14"/>
-                      <foreground color="-458761"/>
+                      <foreground color="-15979766"/>
                       <horizontalAlignment value="0"/>
                       <iconTextGap value="10"/>
                       <margin top="2" left="15" bottom="2" right="2"/>
