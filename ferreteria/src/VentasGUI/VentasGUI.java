@@ -3,14 +3,12 @@ package VentasGUI;
 import Conexion.ConexionDB;
 import Inventario.InventarioDAO;
 import Orden_Compras.OrdenesCompraGUI;
+import PruebaMenu.MenuPrueba;
 import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -45,6 +43,7 @@ public class VentasGUI extends JFrame {
     private JTextField idempleado;
     private JComboBox<String> estado1;
     private JTextField idcliente;
+    private JButton volverAlMenuButton;
     private JButton volverButton;
 
     int filas = 0;
@@ -63,6 +62,14 @@ public class VentasGUI extends JFrame {
     public VentasGUI() {
         initComponents();
         setupEventListeners();
+        volverAlMenuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame jFrame = (JFrame) SwingUtilities.getWindowAncestor(volverAlMenuButton);
+                jFrame.dispose();
+                MenuPrueba.main(null);
+            }
+        });
     }
 
     private void initComponents() {

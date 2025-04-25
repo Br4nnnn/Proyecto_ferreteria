@@ -195,11 +195,11 @@
                   <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <background color="-7664379"/>
+                  <background color="-8356225"/>
                   <font name="JetBrains Mono"/>
                   <foreground color="-458761"/>
                   <horizontalAlignment value="0"/>
-                  <text value="Salir"/>
+                  <text value="Cerrar aplicación"/>
                 </properties>
               </component>
             </children>
